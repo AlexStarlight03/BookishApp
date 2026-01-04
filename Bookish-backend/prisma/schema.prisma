@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Book {
+  idBook          Int       @id @default(autoincrement())
+  title           String
+  editor          String?
+  nb_pages        Int?
+  description     String?
+  isbn            String?   @unique
+  cover_img_url   String?
+
+  reviews         Review[]
+  authors         BookAuthor[]
+  categories      BookCategory[]
+  bookStatus      BookStatus[]
+}
+
+model User {
+  idUser          Int       @id @default(autoincrement())
+  username        String    @unique
+  email           String    @unique
+  hashPassword    String
+  createdAt       DateTime  @default(now())
+
+  bookshelves     Bookshelf[]
+  reviews         Review[]
+  booksStatus     BookStatus[]
+}
+
+model Bookshelf {
+  idBookshelf      Int       @id @default(autoincrement())
+  idUser           Int
+  name             String
+  description      String?
+
+  user             User      @relation(fields:[idUser], references:[idUser], onDelete: Cascade)
+  booksBookshelf   BookStatus[]
+}
+
+model BookStatus {
+  idBook           Int
+  idBookshelf      Int
+  idUser           Int
+  dateStart        DateTime?
+  dateEnd          DateTime?
+  currPage         Int?
+
+  book             Book      @relation(fields:[idBook], references:[idBook])
+  bookshelf        Bookshelf  @relation(fields:[idBookshelf], references:[idBookshelf])
+  user             User      @relation(fields:[idUser], references:[idUser])
+
+  @@id([idBookshelf, idBook])
+}
+
+model Category {
+  idCategory       Int       @id @default(autoincrement())
+  name             String    @unique
+
+  categoryBooks    BookCategory[]
+}
+
+model BookCategory {
+  idCategory       Int
+  idBook           Int
+
+  category         Category  @relation(fields:[idCategory], references:[idCategory])
+  book             Book      @relation(fields:[idBook], references:[idBook])
+
+  @@id([idCategory, idBook])
+}
+
+model Author {
+  idAuthor         Int       @id @default(autoincrement())
+  name             String?
+  lastName         String?
+
+  authorBooks      BookAuthor[]
+}
+
+model BookAuthor {
+  idAuthor         Int
+  idBook           Int
+
+  author           Author    @relation(fields:[idAuthor], references:[idAuthor])
+  book             Book      @relation(fields:[idBook], references:[idBook])
+
+  @@id([idAuthor, idBook])
+}
+
+model Review {
+  idReview         Int       @id @default(autoincrement())
+  idUser           Int
+  idBook           Int
+  rating           Int
+  full_review      String?
+  createdAt        DateTime  @default(now())
+
+  user             User      @relation(fields:[idUser], references:[idUser])
+  book             Book      @relation(fields:[idBook], references:[idBook])
+}

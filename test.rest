@@ -1,0 +1,229 @@
+### Author CRUD
+POST http://localhost:3000/author
+Content-Type: application/json
+
+{
+  "name": "John",
+  "lastName": "Doe"
+}
+
+### Get all authors
+GET http://localhost:3000/author
+
+### Get author by id
+GET http://localhost:3000/author/1
+
+### Update author
+PATCH http://localhost:3000/author/1
+Content-Type: application/json
+
+{
+  "name": "Jane"
+}
+
+### Delete author
+DELETE http://localhost:3000/author/1
+
+
+
+### User CRUD
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "user1@example.com",
+  "password": "password123"
+}
+
+### Get all users
+GET http://localhost:3000/user
+
+### Get user by id
+GET http://localhost:3000/user/1
+
+### Update user
+PATCH http://localhost:3000/user/1
+Content-Type: application/json
+
+{
+  "username": "user1updated"
+}
+
+### Delete user
+DELETE http://localhost:3000/user/1
+
+
+
+
+### Book CRUD
+POST http://localhost:3000/book
+Content-Type: application/json
+
+{
+  "title": "Book Title",
+  "editor": "Editor Name"
+}
+
+### Get all books
+GET http://localhost:3000/book
+
+### Get book by id
+GET http://localhost:3000/book/1
+
+### Update book
+PATCH http://localhost:3000/book/1
+Content-Type: application/json
+
+{
+  "title": "Updated Book Title"
+}
+
+### Delete book
+DELETE http://localhost:3000/book/1
+
+
+
+
+### Category CRUD
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "Fiction"
+}
+
+### Get all categories
+GET http://localhost:3000/category
+
+### Get category by id
+GET http://localhost:3000/category/1
+
+### Update category
+PATCH http://localhost:3000/category/1
+Content-Type: application/json
+
+{
+  "name": "Non-Fiction"
+}
+
+### Delete category
+DELETE http://localhost:3000/category/1
+
+
+
+
+
+### Review CRUD
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": 1,
+  "idBook": 1,
+  "rating": 5,
+  "full_review": "Great book!"
+}
+
+### Get all reviews
+GET http://localhost:3000/review
+
+### Get review by id
+GET http://localhost:3000/review/1
+
+### Update review
+PATCH http://localhost:3000/review/1
+Content-Type: application/json
+
+{
+  "rating": 4
+}
+
+### Delete review
+DELETE http://localhost:3000/review/1
+
+
+
+
+### Bookshelf CRUD
+POST http://localhost:3000/bookshelf
+Content-Type: application/json
+
+{
+  "idUser": 1,
+  "name": "Favorites"
+}
+
+### Get bookshelf by id
+GET http://localhost:3000/bookshelf/1
+
+### Get bookshelves by user
+GET http://localhost:3000/bookshelf/by-user/1
+
+### Update bookshelf
+PATCH http://localhost:3000/bookshelf/1
+Content-Type: application/json
+
+{
+  "name": "Updated Favorites"
+}
+
+### Delete bookshelf
+DELETE http://localhost:3000/bookshelf/1
+
+
+
+
+### BookStatus (composite key)
+POST http://localhost:3000/bookStatus
+Content-Type: application/json
+
+{
+  "idBook": 1,
+  "idBookshelf": 1,
+  "idUser": 1
+}
+
+### Get bookStatus by composite key
+GET http://localhost:3000/bookStatus/1-1
+
+### Update bookStatus
+PATCH http://localhost:3000/bookStatus/1-1
+Content-Type: application/json
+
+{
+  "currPage": 100
+}
+
+### Delete bookStatus
+DELETE http://localhost:3000/bookStatus/1-1
+
+
+
+
+### BookAuthor (composite key)
+POST http://localhost:3000/bookAuthor
+Content-Type: application/json
+
+{
+  "idAuthor": 1,
+  "idBook": 1
+}
+
+### Delete bookAuthor
+DELETE http://localhost:3000/bookAuthor/1-1
+
+
+
+
+### BookCategory (composite key)
+POST http://localhost:3000/bookCategory
+Content-Type: application/json
+
+{
+  "idCategory": 1,
+  "idBook": 1
+}
+
+### Delete bookCategory
+DELETE http://localhost:3000/bookCategory/1-1
