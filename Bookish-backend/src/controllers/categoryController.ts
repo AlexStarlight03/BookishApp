@@ -58,7 +58,7 @@ export const getCategories = async(req: Request, res: Response)=>{
 
 export const modifyCategory = async(req:Request, res:Response) =>{
     try{
-    const id = req.params.idCategory;
+    const id = req.params.id;
     const { name } = req.body;
     
     const idNumber = Number(id);
@@ -94,7 +94,7 @@ export const modifyCategory = async(req:Request, res:Response) =>{
 
 
 export const getCategoryById = async (req: Request, res: Response) => {
-    const idCategory = Number(req.params.idCategory);
+    const idCategory = Number(req.params.id);
     const category = await prisma.category.findUnique({
         where: { idCategory }
     });
@@ -106,7 +106,7 @@ export const getCategoryById = async (req: Request, res: Response) => {
 
 
 export const deleteCategory = async(req: Request, res: Response) =>{
-    const idCategory = Number(req.params.idCategory);
+    const idCategory = Number(req.params.id);
 
     await prisma.category.delete({
         where: {idCategory}

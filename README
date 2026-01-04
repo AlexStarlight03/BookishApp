@@ -1,0 +1,10 @@
+Pour lancer le projet, clonez le repo sur votre machine.
+
+cd bookishapp/Bookish-backend
+
+npm run build
+
+npm run dev
+
+dans VSCode, ouvrir le fichier test.rest dans bookish-backend
+en cliquant sur Send Request sous chaque commande, les tests peuvent être effectués tant que le serveur est en marche.

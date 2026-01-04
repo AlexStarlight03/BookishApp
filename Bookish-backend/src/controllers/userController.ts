@@ -7,8 +7,8 @@ import jwt from "jsonwebtoken";
 
 export const createUser = async (req: Request, res: Response) => {
     try {
-        const { username, email, hashPassword } = req.body;
-        if (!username || !email || !hashPassword) {
+        const { username, email, password } = req.body;
+        if (!username || !email || !password) {
             return res.status(400).json({
                 success: false,
                 message: 'Le nom et l\'email sont requis'
@@ -22,10 +22,26 @@ export const createUser = async (req: Request, res: Response) => {
         if (existingEmail) {
             return res.status(400).json({ message: 'User already exists with this email!' });
         }
-        const hashedPassword = await bcrypt.hash(hashPassword, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
         const user = await prisma.user.create({
-            data: { username, email, hashPassword: hashedPassword }
+            data: { username, email, password: hashedPassword }
         });
+        const defaultShelves = [
+            { name: "Want to read", description: "Books you want to read" },
+            { name: "Reading", description: "Books you are currently reading" },
+            { name: "Done", description: "Books you have finished reading" }
+        ];
+        await Promise.all(
+            defaultShelves.map(shelf =>
+                prisma.bookshelf.create({
+                    data: {
+                        idUser: user.idUser,
+                        name: shelf.name,
+                        description: shelf.description
+                    }
+                })
+            )
+        );
         res.status(201).json({
             success: true,
             data: user
@@ -51,7 +67,7 @@ export const login = async (req: Request, res: Response) => {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) return res.status(400).json({ message: 'User not found!' });
 
-    const validPassword = await bcrypt.compare(password, user.hashPassword);
+    const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) return res.status(400).json({ message: 'Invalid password!' });
     
     const token = jwt.sign(
@@ -90,7 +106,7 @@ export const getUsers = async(req: Request, res: Response)=>{
 export const modifyUser = async (req: Request, res: Response) => {
     try {
         const id = req.params.id;
-        const { username, email } = req.body;
+        const { username, email, password } = req.body;
         const idNumber = Number(id);
         if (isNaN(idNumber)) {
             return res.status(400).json({
@@ -98,9 +114,10 @@ export const modifyUser = async (req: Request, res: Response) => {
                 message: "Paramètre id invalide"
             });
         }
-        const updateData: { username?: string; email?: string } = {};
+        const updateData: { username?: string; email?: string; password?: string } = {};
         if (username) updateData.username = username;
         if (email) updateData.email = email;
+        if (password) updateData.password = await bcrypt.hash(password, 10);
         if (Object.keys(updateData).length === 0) {
             return res.status(400).json({
                 success: false,
@@ -125,7 +142,7 @@ export const modifyUser = async (req: Request, res: Response) => {
         if (error.code === 'P2002') {
             return res.status(400).json({
                 success: false,
-                message: 'Email déjà utilisé'
+                message: 'Email ou Nom utilisateur déjà utilisé'
             });
         }
 

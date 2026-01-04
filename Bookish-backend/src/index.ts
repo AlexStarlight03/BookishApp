@@ -1,20 +1,33 @@
-// import 'dotenv/config'
-import dotenv from "dotenv";
+
+import 'dotenv/config';
 import express, { type Request, type Response } from "express";
 import prisma  from "./prisma/prisma.js";
 
-// import studentRoutes from './routes/studentRoutes'
-// import clubRoutes from './routes/clubRoutes';
-// import bookRoutes from "./routes/book.routes";
-// import cors from 'cors';
+import bookRoutes from "./routes/bookRoutes";
+import authorRoutes from "./routes/authorRoutes";
+import bookAuthorRoutes from "./routes/bookAuthorRoutes";
+import bookCategoryRoutes from "./routes/bookCategoryRoutes";
+import bookshelfRoutes from "./routes/bookshelfRoutes";
+import bookStatusRoute from "./routes/bookStatusRoutes";
+import categoryRoutes from "./routes/categoryRoutes";
+import reviewRoutes from "./routes/reviewRoutes";
+import userRoutes from "./routes/userRoutes";
 
-dotenv.config();
+
+console.log('DATABASE_URL:', process.env.DATABASE_URL);
 const app = express();
 app.use(express.json());
 
 
-// app.use('/auth', authRoutes);
-// app.use('/books', bookRoutes);
+app.use('/book', bookRoutes);
+app.use('/author', authorRoutes);
+app.use('/bookAuthor', bookAuthorRoutes);
+app.use('/bookCategory', bookCategoryRoutes);
+app.use('/bookshelf', bookshelfRoutes);
+app.use('/bookStatus', bookStatusRoute);
+app.use('/category', categoryRoutes);
+app.use('/review', reviewRoutes);
+app.use('/user', userRoutes);
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

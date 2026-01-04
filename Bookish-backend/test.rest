@@ -1,0 +1,434 @@
+### AUTHOR
+POST http://localhost:3000/author
+Content-Type: application/json
+
+{
+  "name": "John",
+  "lastName": "Doe"
+}
+
+### 2nd author creation
+POST http://localhost:3000/author
+Content-Type: application/json
+
+{
+  "name": "Ali",
+  "lastName": "Hazelwood"
+}
+
+### Get all authors
+GET http://localhost:3000/author
+
+### Update author
+PATCH http://localhost:3000/author/1
+Content-Type: application/json
+
+{
+  "name": "Jane"
+}
+
+### Get author by id
+GET http://localhost:3000/author/1
+
+### Delete author
+DELETE http://localhost:3000/author/2
+
+### author creation
+POST http://localhost:3000/author
+Content-Type: application/json
+
+{
+  "name": "Ali",
+  "lastName": "Hazelwood"
+}
+
+
+### USER
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "username": "New User",
+  "email": "usernew@example.com",
+  "password": "password123"
+}
+
+### 2nd user
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "username": "User 2",
+  "email": "user2@example.com",
+  "password": "password123"
+}
+
+### Get all users
+GET http://localhost:3000/user
+
+### Get user by id
+GET http://localhost:3000/user/1
+
+### Update user
+PATCH http://localhost:3000/user/1
+Content-Type: application/json
+
+{
+  "username": "user1updated"
+}
+
+### Delete user
+DELETE http://localhost:3000/user/1
+
+### USER
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "username": "New User",
+  "email": "usernew@example.com",
+  "password": "password123"
+}
+
+### Login
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+  "email": "user2@example.com",
+  "password": "password123"
+}
+
+
+
+
+### BOOK 1
+POST http://localhost:3000/book
+Content-Type: application/json
+
+{
+  "title": "Book bad"
+}
+
+### BOOK 2
+POST http://localhost:3000/book
+Content-Type: application/json
+
+{
+  "title": "Book ok"
+}
+
+### BOOK 3
+POST http://localhost:3000/book
+Content-Type: application/json
+
+{
+  "title": "Book wow"
+}
+
+### Get all books
+GET http://localhost:3000/book
+
+### Get book by id
+GET http://localhost:3000/book/1
+
+### Update book
+PATCH http://localhost:3000/book/1
+Content-Type: application/json
+
+{
+  "title": "Updated Book Title"
+}
+
+### Delete book
+DELETE http://localhost:3000/book/1
+
+
+
+### CATEGORY
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "Fiction"
+}
+
+### CATEGORY
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "Romance"
+}
+
+### CATEGORY
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "Scifi"
+}
+
+### Get all categories
+GET http://localhost:3000/category
+
+### Get category by id
+GET http://localhost:3000/category/1
+
+### Update category
+PATCH http://localhost:3000/category/1
+Content-Type: application/json
+
+{
+  "name": "Non-Fiction"
+}
+
+### Delete category
+DELETE http://localhost:3000/category/1
+
+
+
+
+### REVIEW User 1
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": 2,
+  "idBook": 2,
+  "rating": 5,
+  "full_review": "Wow!"
+}
+
+### REVIEW
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": 2,
+  "idBook": 3,
+  "rating": 2,
+  "full_review": "Bof..."
+}
+
+### REVIEW
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": 3,
+  "idBook": 3,
+  "rating": 5,
+  "full_review": "Wow!!!!!"
+}
+
+### Get all reviews
+GET http://localhost:3000/review
+
+### Get review by id
+GET http://localhost:3000/review/3
+
+### Update review
+PATCH http://localhost:3000/review/3
+Content-Type: application/json
+
+{
+  "rating": 1,
+  "full_review": "Plus j'y repense, moins c'était bon..."
+}
+
+### Get all reviews from a user
+GET http://localhost:3000/review/by-user/2
+
+### Get all reviews from a book
+GET http://localhost:3000/review/by-book/3
+
+### Delete review
+DELETE http://localhost:3000/review/2
+
+
+
+
+
+
+### BOOKSHELF
+POST http://localhost:3000/bookshelf
+Content-Type: application/json
+
+{
+  "idUser": 3,
+  "name": "SciFi New Releases"
+}
+
+### BOOKSHELF
+POST http://localhost:3000/bookshelf
+Content-Type: application/json
+
+{
+  "idUser": 3,
+  "name": "My Stuff"
+}
+
+### BOOKSHELF
+POST http://localhost:3000/bookshelf
+Content-Type: application/json
+
+{
+  "idUser": 2,
+  "name": "Bad books"
+}
+
+### Get all bookshelves - 3 Bookshelves sont créées automatiquement lors de la création d'un compte.
+GET http://localhost:3000/bookshelf
+
+### Get bookshelf by id
+GET http://localhost:3000/bookshelf/6
+
+### Get bookshelves by user
+GET http://localhost:3000/bookshelf/by-user/3
+
+### Update bookshelf
+PATCH http://localhost:3000/bookshelf/11
+Content-Type: application/json
+
+{
+  "name": "Updated Favorites"
+}
+
+### Delete bookshelf
+DELETE http://localhost:3000/bookshelf/11
+
+
+
+
+### BOOKSTATUS
+POST http://localhost:3000/bookStatus
+Content-Type: application/json
+
+{
+  "idBook": 3,
+  "idBookshelf": 9,
+  "idUser": 3
+}
+
+### BOOKSTATUS
+POST http://localhost:3000/bookStatus
+Content-Type: application/json
+
+{
+  "idBook": 2,
+  "idBookshelf": 8,
+  "idUser": 3
+}
+
+### BOOKSTATUS
+POST http://localhost:3000/bookStatus
+Content-Type: application/json
+
+{
+  "idBook": 2,
+  "idBookshelf": 4,
+  "idUser": 2
+}
+
+### Get all bookStatus
+GET http://localhost:3000/bookStatus/
+
+### Get bookStatus by composite key
+GET http://localhost:3000/bookStatus/8-2
+
+### Update bookStatus
+PATCH http://localhost:3000/bookStatus/9-3
+Content-Type: application/json
+
+{
+  "dateStart": "2026-01-04T21:00:00.000Z",
+  "currPage": 100
+}
+
+### Get all bookStatus from a user
+GET http://localhost:3000/bookStatus/by-user/3
+
+### Get all bookStatus from a bookshelf
+GET http://localhost:3000/bookStatus/by-bookshelf/9
+
+### Delete bookStatus
+DELETE http://localhost:3000/bookStatus/9-3
+
+
+
+
+### BOOKAUTHOR
+POST http://localhost:3000/bookAuthor
+Content-Type: application/json
+
+{
+  "idAuthor": 3,
+  "idBook": 3
+}
+
+### BOOKAUTHOR
+POST http://localhost:3000/bookAuthor
+Content-Type: application/json
+
+{
+  "idAuthor": 3,
+  "idBook": 2
+}
+
+### BOOKAUTHOR
+POST http://localhost:3000/bookAuthor
+Content-Type: application/json
+
+{
+  "idAuthor": 1,
+  "idBook": 2
+}
+
+### Get all authors from a book
+GET http://localhost:3000/bookAuthor/by-book/2
+
+### Get all books from an author
+GET http://localhost:3000/bookAuthor/by-author/1
+
+### Delete bookAuthor
+DELETE http://localhost:3000/bookAuthor/1-2
+
+
+
+
+### BOOKCATEGORY
+POST http://localhost:3000/bookCategory
+Content-Type: application/json
+
+{
+  "idCategory": 2,
+  "idBook": 3
+}
+
+### BOOKCATEGORY
+POST http://localhost:3000/bookCategory
+Content-Type: application/json
+
+{
+  "idCategory": 3,
+  "idBook": 3
+}
+
+### BOOKCATEGORY
+POST http://localhost:3000/bookCategory
+Content-Type: application/json
+
+{
+  "idCategory": 3,
+  "idBook": 2
+}
+
+### Get all categories from a book
+GET http://localhost:3000/bookCategory/by-book/3
+
+### Get all books from a category
+GET http://localhost:3000/bookCategory/by-category/2
+
+### Delete bookCategory
+DELETE http://localhost:3000/bookCategory/3-3

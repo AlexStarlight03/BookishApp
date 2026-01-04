@@ -41,22 +41,11 @@ export const addBookAuthor = async (req: Request, res: Response) => {
 
 export const deleteBookAuthor = async (req: Request, res: Response) => {
 	try {
-		const id = req.params.id;
-		if (!id) {
-			return res.status(400).json({
-				success: false,
-				message: "id est requis"
-			});
-		}
-		
-		const [idAuthor, idBook] = id.split('-').map(Number);
-		if (!idAuthor || !idBook) {
-			return res.status(400).json({
-				success: false,
-				message: "Format d'identifiant invalide (attendu: idAuthor-idBook)"
-			});
-		}
-
+        const idAuthor = Number(req.params.idAuthor);
+        const idBook = Number(req.params.idBook);
+        if (!idAuthor || !idBook) {
+            return res.status(400).json({ success: false, message: "Format d'identifiant invalide (attendu: idAuthor-idBook)" });
+        }
 		await prisma.bookAuthor.delete({
 			where: {
 				idAuthor_idBook: {
@@ -84,3 +73,47 @@ export const deleteBookAuthor = async (req: Request, res: Response) => {
 		});
 	}
 };
+
+export const getAuthorsFromBook = async (req: Request, res: Response) => {
+    try {
+        const idBook = Number(req.params.idBook);
+        if (!idBook) {
+            return res.status(400).json({ success: false, message: "Paramètre idBook manquant ou invalide" });
+        }
+        const authors = await prisma.bookAuthor.findMany({
+            where: { idBook }
+        });
+        res.status(200).json({
+            success: true,
+            data: authors
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: 'Erreur lors de la récupération des auteurs du livre',
+            error: error.message
+        });
+    }
+}
+
+export const getBooksFromAuthor = async (req: Request, res: Response) => {
+    try {
+        const idAuthor = Number(req.params.idAuthor);
+        if (!idAuthor) {
+            return res.status(400).json({ success: false, message: "Paramètre idAuthor manquant ou invalide" });
+        }
+        const books = await prisma.bookAuthor.findMany({
+            where: { idAuthor }
+        });
+        res.status(200).json({
+            success: true,
+            data: books
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: "Erreur lors de la récupération des livres de l'auteur",
+            error: error.message
+        });
+    }
+}

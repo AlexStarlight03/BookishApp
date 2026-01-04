@@ -59,7 +59,7 @@ export const getReviews = async (req: Request, res: Response) => {
 
 export const modifyReview = async (req: Request, res: Response) => {
     try {
-        const id = req.params.idReview;
+        const id = req.params.id;
         const { rating, full_review } = req.body;
         const idNumber = Number(id);
         const updateData: { rating?: number; full_review?: string } = {};
@@ -92,7 +92,7 @@ export const modifyReview = async (req: Request, res: Response) => {
 
 
 export const getReviewById = async (req: Request, res: Response) => {
-    const idReview = Number(req.params.idReview);
+    const idReview = Number(req.params.id);
     const review = await prisma.review.findUnique({
         where: { idReview }
     });
@@ -104,7 +104,7 @@ export const getReviewById = async (req: Request, res: Response) => {
 
 
 export const deleteReview = async(req: Request, res: Response) =>{
-    const idReview = Number(req.params.idReview);
+    const idReview = Number(req.params.id);
 
     await prisma.review.delete({
         where: {idReview}
@@ -112,4 +112,48 @@ export const deleteReview = async(req: Request, res: Response) =>{
     res.status(200).json({
         success: true, 
         message : `Review avec l'id ${idReview} supprimé avec succès`})
+}
+
+export const getReviewsFromUser = async (req: Request, res: Response) => {
+    try {
+        const idUser = Number(req.params.idUser);
+        if (!idUser) {
+            return res.status(400).json({ success: false, message: "Paramètre idUser manquant ou invalide" });
+        }
+        const reviews = await prisma.review.findMany({
+            where: { idUser }
+        });
+        res.status(200).json({
+            success: true,
+            data: reviews
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: 'Erreur lors de la récupération des reviews de l\'utilisateur',
+            error: error.message
+        });
+    }
+}
+
+export const getReviewsFromBook = async (req: Request, res: Response) => {
+    try {
+        const idBook= Number(req.params.idBook);
+        if (!idBook) {
+            return res.status(400).json({ success: false, message: "Paramètre idBook manquant ou invalide" });
+        }
+        const reviews = await prisma.review.findMany({
+            where: { idBook }
+        });
+        res.status(200).json({
+            success: true,
+            data: reviews
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: 'Erreur lors de la récupération des reviews du livre',
+            error: error.message
+        });
+    }
 }

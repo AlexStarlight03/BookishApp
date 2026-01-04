@@ -32,7 +32,7 @@ model User {
   idUser          Int       @id @default(autoincrement())
   username        String    @unique
   email           String    @unique
-  hashPassword    String
+  password    String
   createdAt       DateTime  @default(now())
 
   bookshelves     Bookshelf[]

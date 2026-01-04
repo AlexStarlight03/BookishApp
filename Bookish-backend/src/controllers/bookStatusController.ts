@@ -61,10 +61,8 @@ export const getAllBookStatus = async (req: Request, res: Response) => {
 
 export const getBookStatusById = async (req: Request, res: Response) => {
     try {
-        if (!req.params.id) {
-            return res.status(400).json({ success: false, message: "Paramètre 'id' manquant" });
-        }
-        const [idBookshelf, idBook] = req.params.id.split('-').map(Number);
+        const idBookshelf = Number(req.params.idBookshelf);
+        const idBook = Number(req.params.idBook);
         if (!idBookshelf || !idBook) {
             return res.status(400).json({ success: false, message: "Format d'identifiant invalide (attendu: idBookshelf-idBook)" });
         }
@@ -91,10 +89,8 @@ export const getBookStatusById = async (req: Request, res: Response) => {
 
 export const modifyBookStatus = async (req: Request, res: Response) => {
     try {
-        if (!req.params.id) {
-            return res.status(400).json({ success: false, message: "Paramètre 'id' manquant" });
-        }
-        const [idBookshelf, idBook] = req.params.id.split('-').map(Number);
+        const idBookshelf = Number(req.params.idBookshelf);
+        const idBook = Number(req.params.idBook);
         if (!idBookshelf || !idBook) {
             return res.status(400).json({ success: false, message: "Format d'identifiant invalide (attendu: idBookshelf-idBook)" });
         }
@@ -133,10 +129,8 @@ export const modifyBookStatus = async (req: Request, res: Response) => {
 
 export const deleteBookStatus = async (req: Request, res: Response) => {
     try {
-        if (!req.params.id) {
-            return res.status(400).json({ success: false, message: "Paramètre 'id' manquant" });
-        }
-        const [idBookshelf, idBook] = req.params.id.split('-').map(Number);
+        const idBookshelf = Number(req.params.idBookshelf);
+        const idBook = Number(req.params.idBook);
         if (!idBookshelf || !idBook) {
             return res.status(400).json({ success: false, message: "Format d'identifiant invalide (attendu: idBookshelf-idBook)" });
         }
@@ -166,3 +160,47 @@ export const deleteBookStatus = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const getBooksFromBookshelf = async (req: Request, res: Response) => {
+    try {
+        const idBookshelf = Number(req.params.idBookshelf);
+        if (!idBookshelf) {
+            return res.status(400).json({ success: false, message: "Paramètre idBookshelf manquant ou invalide" });
+        }
+        const books = await prisma.bookStatus.findMany({
+            where: { idBookshelf }
+        });
+        res.status(200).json({
+            success: true,
+            data: books
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: 'Erreur lors de la récupération des livres de la bibliotheque',
+            error: error.message
+        });
+    }
+}
+
+export const getBooksFromUser = async (req: Request, res: Response) => {
+    try {
+        const idUser= Number(req.params.idUser);
+        if (!idUser) {
+            return res.status(400).json({ success: false, message: "Paramètre idUser manquant ou invalide" });
+        }
+        const books = await prisma.bookStatus.findMany({
+            where: { idUser }
+        });
+        res.status(200).json({
+            success: true,
+            data: books
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            message: 'Erreur lors de la récupération des livres de l\'utilisateur',
+            error: error.message
+        });
+    }
+}

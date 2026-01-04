@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createReview,deleteReview, getReviews, modifyReview, getReviewById} from '../controllers/reviewController'
+import { createReview,deleteReview, getReviews, modifyReview, getReviewById, getReviewsFromBook, getReviewsFromUser} from '../controllers/reviewController'
 import { validateId } from "../middleware/handleError";
 
 const router = Router();
@@ -9,5 +9,8 @@ router.post('/',createReview);
 router.patch('/:id',validateId('id'),modifyReview);
 router.get('/:id', validateId('id'),getReviewById)
 router.delete('/:id',validateId('id'),deleteReview);
+
+router.get('/by-user/:idUser', getReviewsFromUser);
+router.get('/by-book/:idBook', getReviewsFromBook);
 
 export default router;
