@@ -1,6 +1,7 @@
 import { getBooksFromUser } from "@/app/actions/bookStatus";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request, context: { params: { idUser: string } }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ idUser: string }> }) {
   const params = await context.params;
   const idUser = Number(params.idUser);
   if (isNaN(idUser)) {

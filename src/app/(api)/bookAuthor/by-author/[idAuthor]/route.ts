@@ -1,6 +1,7 @@
 import { getBooksFromAuthor } from "@/app/actions/bookAuthor";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request, context: { params: { idAuthor: string } }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ idAuthor: string }> }) {
   const params = await context.params;
   const idAuthor = Number(params.idAuthor);
   if (isNaN(idAuthor)) {

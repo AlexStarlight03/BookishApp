@@ -1,6 +1,7 @@
 import { getBookStatusById, modifyBookStatus, deleteBookStatus } from "@/app/actions/bookStatus";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request, context: { params: { composite: string } }) {
+export async function GET(request: NextRequest, context: { params: { composite: string } }) {
   const params = await context.params;
   const [idBookshelfStr, idBookStr] = params.composite.split("-");
   const idBookshelf = Number(idBookshelfStr);
@@ -11,7 +12,7 @@ export async function GET(request: Request, context: { params: { composite: stri
   return getBookStatusById({ idBookshelf, idBook });
 }
 
-export async function PATCH(request: Request, context: { params: { composite: string } }) {
+export async function PATCH(request: NextRequest, context: { params: Promise<{ composite: string }> }) {
   const params = await context.params;
   const [idBookshelfStr, idBookStr] = params.composite.split("-");
   const idBookshelf = Number(idBookshelfStr);
@@ -22,7 +23,7 @@ export async function PATCH(request: Request, context: { params: { composite: st
   return modifyBookStatus(request, { idBookshelf, idBook });
 }
 
-export async function DELETE(request: Request, context: { params: { composite: string } }) {
+export async function DELETE(request: NextRequest, context: { params: Promise<{ composite: string }> }) {
   const params = await context.params;
   const [idBookshelfStr, idBookStr] = params.composite.split("-");
   const idBookshelf = Number(idBookshelfStr);

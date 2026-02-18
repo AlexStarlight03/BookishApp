@@ -6,6 +6,6 @@ export async function GET() {
   return NextResponse.json(result);
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   return createUser(request);
 }

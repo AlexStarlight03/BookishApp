@@ -1,6 +1,7 @@
 import { getCategoryById, modifyCategory, deleteCategory } from "@/app/actions/category";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request, context: { params: { id: string } }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const params = await context.params;
   const id = Number(params.id);
   if (isNaN(id)) {
@@ -9,7 +10,7 @@ export async function GET(request: Request, context: { params: { id: string } })
   return getCategoryById({ id });
 }
 
-export async function PATCH(request: Request, context: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const params = await context.params;
   const id = Number(params.id);
   if (isNaN(id)) {
@@ -18,7 +19,7 @@ export async function PATCH(request: Request, context: { params: { id: string } 
   return modifyCategory(request, { id });
 }
 
-export async function DELETE(request: Request, context: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const params = await context.params;
   const id = Number(params.id);
   if (isNaN(id)) {
