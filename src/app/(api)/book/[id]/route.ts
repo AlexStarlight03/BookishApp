@@ -10,7 +10,7 @@ export async function GET(request: NextRequest, context: { params: Promise<{ id:
   return await getBookById({ id });
 }
 
-export async function PATCH(request: Request, context: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const params = await context.params;
   const id = Number(params.id);
   if (isNaN(id)) {
@@ -19,7 +19,7 @@ export async function PATCH(request: Request, context: { params: { id: string } 
   return modifyBook(request, { id });
 }
 
-export async function DELETE(request: Request, context: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const params = await context.params;
   const id = Number(params.id);
   if (isNaN(id)) {

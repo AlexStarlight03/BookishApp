@@ -1,6 +1,7 @@
 import { createBookStatus, getAllBookStatus } from "@/app/actions/bookStatus";
+import { NextRequest } from "next/server";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   return createBookStatus(request);
 }
 

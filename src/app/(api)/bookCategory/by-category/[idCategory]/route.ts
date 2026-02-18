@@ -1,6 +1,7 @@
 import { getBooksFromCategory } from "@/app/actions/bookCategory";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request, context: { params: { idCategory: string } }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ idCategory: string }> }) {
   const params = await context.params;
   const idCategory = Number(params.idCategory);
   if (isNaN(idCategory)) {

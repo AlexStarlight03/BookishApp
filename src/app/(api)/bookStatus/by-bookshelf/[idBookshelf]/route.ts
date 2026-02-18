@@ -1,6 +1,7 @@
 import { getBooksFromBookshelf } from "@/app/actions/bookStatus";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request, context: { params: { idBookshelf: string } }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ idBookshelf: string }> }) {
   const params = await context.params;
   const idBookshelf = Number(params.idBookshelf);
   if (isNaN(idBookshelf)) {
