@@ -1,12 +1,13 @@
 import { getBookById, modifyBook, deleteBook } from "@/app/actions/book";
+import { NextRequest } from "next/server";
 
-export async function GET(request: Request, context: { params: { id: string } }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const params = await context.params;
   const id = Number(params.id);
-  if (isNaN(id)) {
+  if (isNaN(id) || id < 1) {
     return new Response(JSON.stringify({ success: false, message: "Invalid id" }), { status: 400 });
   }
-  return getBookById({ id });
+  return await getBookById({ id });
 }
 
 export async function PATCH(request: Request, context: { params: { id: string } }) {
