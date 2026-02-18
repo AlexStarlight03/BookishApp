@@ -44,6 +44,7 @@ export type BookMinAggregateOutputType = {
   description: string | null
   isbn: string | null
   cover_img_url: string | null
+  googleBooksId: string | null
 }
 
 export type BookMaxAggregateOutputType = {
@@ -54,6 +55,7 @@ export type BookMaxAggregateOutputType = {
   description: string | null
   isbn: string | null
   cover_img_url: string | null
+  googleBooksId: string | null
 }
 
 export type BookCountAggregateOutputType = {
@@ -64,6 +66,7 @@ export type BookCountAggregateOutputType = {
   description: number
   isbn: number
   cover_img_url: number
+  googleBooksId: number
   _all: number
 }
 
@@ -86,6 +89,7 @@ export type BookMinAggregateInputType = {
   description?: true
   isbn?: true
   cover_img_url?: true
+  googleBooksId?: true
 }
 
 export type BookMaxAggregateInputType = {
@@ -96,6 +100,7 @@ export type BookMaxAggregateInputType = {
   description?: true
   isbn?: true
   cover_img_url?: true
+  googleBooksId?: true
 }
 
 export type BookCountAggregateInputType = {
@@ -106,6 +111,7 @@ export type BookCountAggregateInputType = {
   description?: true
   isbn?: true
   cover_img_url?: true
+  googleBooksId?: true
   _all?: true
 }
 
@@ -203,6 +209,7 @@ export type BookGroupByOutputType = {
   description: string | null
   isbn: string | null
   cover_img_url: string | null
+  googleBooksId: string | null
   _count: BookCountAggregateOutputType | null
   _avg: BookAvgAggregateOutputType | null
   _sum: BookSumAggregateOutputType | null
@@ -236,6 +243,7 @@ export type BookWhereInput = {
   description?: Prisma.StringNullableFilter<"Book"> | string | null
   isbn?: Prisma.StringNullableFilter<"Book"> | string | null
   cover_img_url?: Prisma.StringNullableFilter<"Book"> | string | null
+  googleBooksId?: Prisma.StringNullableFilter<"Book"> | string | null
   reviews?: Prisma.ReviewListRelationFilter
   authors?: Prisma.BookAuthorListRelationFilter
   categories?: Prisma.BookCategoryListRelationFilter
@@ -250,6 +258,7 @@ export type BookOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isbn?: Prisma.SortOrderInput | Prisma.SortOrder
   cover_img_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleBooksId?: Prisma.SortOrderInput | Prisma.SortOrder
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   authors?: Prisma.BookAuthorOrderByRelationAggregateInput
   categories?: Prisma.BookCategoryOrderByRelationAggregateInput
@@ -267,6 +276,7 @@ export type BookWhereUniqueInput = Prisma.AtLeast<{
   nb_pages?: Prisma.IntNullableFilter<"Book"> | number | null
   description?: Prisma.StringNullableFilter<"Book"> | string | null
   cover_img_url?: Prisma.StringNullableFilter<"Book"> | string | null
+  googleBooksId?: Prisma.StringNullableFilter<"Book"> | string | null
   reviews?: Prisma.ReviewListRelationFilter
   authors?: Prisma.BookAuthorListRelationFilter
   categories?: Prisma.BookCategoryListRelationFilter
@@ -281,6 +291,7 @@ export type BookOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   isbn?: Prisma.SortOrderInput | Prisma.SortOrder
   cover_img_url?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleBooksId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BookCountOrderByAggregateInput
   _avg?: Prisma.BookAvgOrderByAggregateInput
   _max?: Prisma.BookMaxOrderByAggregateInput
@@ -299,6 +310,7 @@ export type BookScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Book"> | string | null
   isbn?: Prisma.StringNullableWithAggregatesFilter<"Book"> | string | null
   cover_img_url?: Prisma.StringNullableWithAggregatesFilter<"Book"> | string | null
+  googleBooksId?: Prisma.StringNullableWithAggregatesFilter<"Book"> | string | null
 }
 
 export type BookCreateInput = {
@@ -308,6 +320,7 @@ export type BookCreateInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewCreateNestedManyWithoutBookInput
   authors?: Prisma.BookAuthorCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryCreateNestedManyWithoutBookInput
@@ -322,6 +335,7 @@ export type BookUncheckedCreateInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutBookInput
   authors?: Prisma.BookAuthorUncheckedCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryUncheckedCreateNestedManyWithoutBookInput
@@ -335,6 +349,7 @@ export type BookUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUpdateManyWithoutBookNestedInput
   authors?: Prisma.BookAuthorUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUpdateManyWithoutBookNestedInput
@@ -349,6 +364,7 @@ export type BookUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutBookNestedInput
   authors?: Prisma.BookAuthorUncheckedUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUncheckedUpdateManyWithoutBookNestedInput
@@ -363,6 +379,7 @@ export type BookCreateManyInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
 }
 
 export type BookUpdateManyMutationInput = {
@@ -372,6 +389,7 @@ export type BookUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BookUncheckedUpdateManyInput = {
@@ -382,6 +400,7 @@ export type BookUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BookCountOrderByAggregateInput = {
@@ -392,6 +411,7 @@ export type BookCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isbn?: Prisma.SortOrder
   cover_img_url?: Prisma.SortOrder
+  googleBooksId?: Prisma.SortOrder
 }
 
 export type BookAvgOrderByAggregateInput = {
@@ -407,6 +427,7 @@ export type BookMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isbn?: Prisma.SortOrder
   cover_img_url?: Prisma.SortOrder
+  googleBooksId?: Prisma.SortOrder
 }
 
 export type BookMinOrderByAggregateInput = {
@@ -417,6 +438,7 @@ export type BookMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   isbn?: Prisma.SortOrder
   cover_img_url?: Prisma.SortOrder
+  googleBooksId?: Prisma.SortOrder
 }
 
 export type BookSumOrderByAggregateInput = {
@@ -516,6 +538,7 @@ export type BookCreateWithoutBookStatusInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewCreateNestedManyWithoutBookInput
   authors?: Prisma.BookAuthorCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryCreateNestedManyWithoutBookInput
@@ -529,6 +552,7 @@ export type BookUncheckedCreateWithoutBookStatusInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutBookInput
   authors?: Prisma.BookAuthorUncheckedCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryUncheckedCreateNestedManyWithoutBookInput
@@ -557,6 +581,7 @@ export type BookUpdateWithoutBookStatusInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUpdateManyWithoutBookNestedInput
   authors?: Prisma.BookAuthorUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUpdateManyWithoutBookNestedInput
@@ -570,6 +595,7 @@ export type BookUncheckedUpdateWithoutBookStatusInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutBookNestedInput
   authors?: Prisma.BookAuthorUncheckedUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUncheckedUpdateManyWithoutBookNestedInput
@@ -582,6 +608,7 @@ export type BookCreateWithoutCategoriesInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewCreateNestedManyWithoutBookInput
   authors?: Prisma.BookAuthorCreateNestedManyWithoutBookInput
   bookStatus?: Prisma.BookStatusCreateNestedManyWithoutBookInput
@@ -595,6 +622,7 @@ export type BookUncheckedCreateWithoutCategoriesInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutBookInput
   authors?: Prisma.BookAuthorUncheckedCreateNestedManyWithoutBookInput
   bookStatus?: Prisma.BookStatusUncheckedCreateNestedManyWithoutBookInput
@@ -623,6 +651,7 @@ export type BookUpdateWithoutCategoriesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUpdateManyWithoutBookNestedInput
   authors?: Prisma.BookAuthorUpdateManyWithoutBookNestedInput
   bookStatus?: Prisma.BookStatusUpdateManyWithoutBookNestedInput
@@ -636,6 +665,7 @@ export type BookUncheckedUpdateWithoutCategoriesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutBookNestedInput
   authors?: Prisma.BookAuthorUncheckedUpdateManyWithoutBookNestedInput
   bookStatus?: Prisma.BookStatusUncheckedUpdateManyWithoutBookNestedInput
@@ -648,6 +678,7 @@ export type BookCreateWithoutAuthorsInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryCreateNestedManyWithoutBookInput
   bookStatus?: Prisma.BookStatusCreateNestedManyWithoutBookInput
@@ -661,6 +692,7 @@ export type BookUncheckedCreateWithoutAuthorsInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryUncheckedCreateNestedManyWithoutBookInput
   bookStatus?: Prisma.BookStatusUncheckedCreateNestedManyWithoutBookInput
@@ -689,6 +721,7 @@ export type BookUpdateWithoutAuthorsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUpdateManyWithoutBookNestedInput
   bookStatus?: Prisma.BookStatusUpdateManyWithoutBookNestedInput
@@ -702,6 +735,7 @@ export type BookUncheckedUpdateWithoutAuthorsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUncheckedUpdateManyWithoutBookNestedInput
   bookStatus?: Prisma.BookStatusUncheckedUpdateManyWithoutBookNestedInput
@@ -714,6 +748,7 @@ export type BookCreateWithoutReviewsInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   authors?: Prisma.BookAuthorCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryCreateNestedManyWithoutBookInput
   bookStatus?: Prisma.BookStatusCreateNestedManyWithoutBookInput
@@ -727,6 +762,7 @@ export type BookUncheckedCreateWithoutReviewsInput = {
   description?: string | null
   isbn?: string | null
   cover_img_url?: string | null
+  googleBooksId?: string | null
   authors?: Prisma.BookAuthorUncheckedCreateNestedManyWithoutBookInput
   categories?: Prisma.BookCategoryUncheckedCreateNestedManyWithoutBookInput
   bookStatus?: Prisma.BookStatusUncheckedCreateNestedManyWithoutBookInput
@@ -755,6 +791,7 @@ export type BookUpdateWithoutReviewsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authors?: Prisma.BookAuthorUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUpdateManyWithoutBookNestedInput
   bookStatus?: Prisma.BookStatusUpdateManyWithoutBookNestedInput
@@ -768,6 +805,7 @@ export type BookUncheckedUpdateWithoutReviewsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   cover_img_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBooksId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authors?: Prisma.BookAuthorUncheckedUpdateManyWithoutBookNestedInput
   categories?: Prisma.BookCategoryUncheckedUpdateManyWithoutBookNestedInput
   bookStatus?: Prisma.BookStatusUncheckedUpdateManyWithoutBookNestedInput
@@ -839,6 +877,7 @@ export type BookSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   description?: boolean
   isbn?: boolean
   cover_img_url?: boolean
+  googleBooksId?: boolean
   reviews?: boolean | Prisma.Book$reviewsArgs<ExtArgs>
   authors?: boolean | Prisma.Book$authorsArgs<ExtArgs>
   categories?: boolean | Prisma.Book$categoriesArgs<ExtArgs>
@@ -854,6 +893,7 @@ export type BookSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   isbn?: boolean
   cover_img_url?: boolean
+  googleBooksId?: boolean
 }, ExtArgs["result"]["book"]>
 
 export type BookSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -864,6 +904,7 @@ export type BookSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   isbn?: boolean
   cover_img_url?: boolean
+  googleBooksId?: boolean
 }, ExtArgs["result"]["book"]>
 
 export type BookSelectScalar = {
@@ -874,9 +915,10 @@ export type BookSelectScalar = {
   description?: boolean
   isbn?: boolean
   cover_img_url?: boolean
+  googleBooksId?: boolean
 }
 
-export type BookOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idBook" | "title" | "editor" | "nb_pages" | "description" | "isbn" | "cover_img_url", ExtArgs["result"]["book"]>
+export type BookOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idBook" | "title" | "editor" | "nb_pages" | "description" | "isbn" | "cover_img_url" | "googleBooksId", ExtArgs["result"]["book"]>
 export type BookInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | Prisma.Book$reviewsArgs<ExtArgs>
   authors?: boolean | Prisma.Book$authorsArgs<ExtArgs>
@@ -903,6 +945,7 @@ export type $BookPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     description: string | null
     isbn: string | null
     cover_img_url: string | null
+    googleBooksId: string | null
   }, ExtArgs["result"]["book"]>
   composites: {}
 }
@@ -1337,6 +1380,7 @@ export interface BookFieldRefs {
   readonly description: Prisma.FieldRef<"Book", 'String'>
   readonly isbn: Prisma.FieldRef<"Book", 'String'>
   readonly cover_img_url: Prisma.FieldRef<"Book", 'String'>
+  readonly googleBooksId: Prisma.FieldRef<"Book", 'String'>
 }
     
 

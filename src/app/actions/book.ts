@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function createBook(request: Request) {
   try {
     const body = await request.json();
-    const { title, editor, nb_pages, description, isbn, cover_img_url } = body;
+    const { title, editor, nb_pages, description, isbn, cover_img_url, googleBooksId, authors } = body;
     if (!title) {
       return NextResponse.json(
         { success: false, message: "Le titre est requis" },
@@ -20,8 +20,27 @@ export async function createBook(request: Request) {
         description: description ?? null,
         isbn: isbn ?? null,
         cover_img_url: cover_img_url ?? null,
+        googleBooksId: googleBooksId ?? null,
       },
     });
+
+    if (Array.isArray(authors)) {
+      for (const authorName of authors) {
+        let author = await prisma.author.findFirst({
+          where: {name: authorName},
+        });
+        if (!author) {
+          author = await prisma.author.create({
+            data: { name: authorName },
+          });
+        }
+        await prisma.bookAuthor.create({
+          data: {
+            idBook: book.idBook,
+            idAuthor: author.idAuthor,
+          },
+        });
+      }}
 
     return NextResponse.json({ success: true, book }, { status: 201 });
   } catch (error: any) {

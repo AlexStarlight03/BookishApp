@@ -1,4 +1,5 @@
 // src/app/dashboard/page.tsx
+
 import { stackServerApp } from "@/lib/stack";
 
 export default async function DashboardPage() {
@@ -11,8 +12,8 @@ export default async function DashboardPage() {
   return (
     <div>
       <h1>Bienvenue, {user.displayName || user.primaryEmail}</h1>
-      <p>ID: {user.id}</p>
-      <p>Email: {user.primaryEmail}</p>
+      {/* <p>ID: {user.id}</p>
+      <p>Email: {user.primaryEmail}</p> */}
     </div>
   );
 }
