@@ -1,7 +1,7 @@
 import { addBookAuthor, deleteBookAuthor } from "@/app/actions/bookAuthor";
 import { NextRequest } from "next/server";
 
-export async function POST(request: NextRequest, context: { params: { composite: string } }) {
+export async function POST(request: NextRequest, context: { params: Promise<{ composite: string }> }) {
   const params = await context.params;
   const [idAuthorStr, idBookStr] = params.composite.split("-");
   const idAuthor = Number(idAuthorStr);
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest, context: { params: { composite:
   return addBookAuthor({ idAuthor, idBook });
 }
 
-export async function DELETE(request: NextRequest, context: { params: { composite: string } }) {
+export async function DELETE(request: NextRequest, context: { params: Promise<{ composite: string }> }) {
   const params = await context.params;
   const [idAuthorStr, idBookStr] = params.composite.split("-");
   const idAuthor = Number(idAuthorStr);
