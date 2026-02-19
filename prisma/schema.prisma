@@ -21,6 +21,7 @@ model Book {
   description     String?
   isbn            String?   @unique
   cover_img_url   String?
+  googleBooksId   String?
 
   reviews         Review[]
   authors         BookAuthor[]

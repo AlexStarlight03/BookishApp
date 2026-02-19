@@ -1124,7 +1124,8 @@ export const BookScalarFieldEnum = {
   nb_pages: 'nb_pages',
   description: 'description',
   isbn: 'isbn',
-  cover_img_url: 'cover_img_url'
+  cover_img_url: 'cover_img_url',
+  googleBooksId: 'googleBooksId'
 } as const
 
 export type BookScalarFieldEnum = (typeof BookScalarFieldEnum)[keyof typeof BookScalarFieldEnum]
