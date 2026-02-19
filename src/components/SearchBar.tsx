@@ -17,11 +17,6 @@ export default function SearchBar({ onSearch }: SearchBarProps ) {
                 onSearch(query, type);
             }}
         >
-            <select value={type} onChange={e => setType(e.target.value)} className="border rounded px-2">
-                <option value="title">Titre</option>
-                <option value="title">Auteur</option>
-                <option value="title">Série</option>
-            </select>
             <input
                 className="border rounded px-2 py-1"
                 placeholder="Recherche..."
