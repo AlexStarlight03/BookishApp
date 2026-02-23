@@ -1,3 +1,93 @@
+# === TESTS POUR PRÉSENTATION: Création d'utilisateurs et ajout de reviews ===
+
+# Créer plusieurs utilisateurs
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "username": "Alice Demo",
+  "email": "alice@example.com",
+  "stackAuthId": "demo_user_alice"
+}
+
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "username": "Bob Demo",
+  "email": "bob@example.com",
+  "stackAuthId": "demo_user_bob"
+}
+
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "username": "Charlie Demo",
+  "email": "charlie@example.com",
+  "stackAuthId": "demo_user_charlie"
+}
+
+# Ajouter des reviews sur des livres existants (remplacer les idBook par ceux de votre base)
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": "demo_user_alice",
+  "idBook": 2,
+  "rating": 4,
+  "full_review": "Très bon livre, je recommande!"
+}
+
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": "demo_user_bob",
+  "idBook": 2,
+  "rating": 3,
+  "full_review": "Pas mal, mais quelques longueurs."
+}
+
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": "demo_user_charlie",
+  "idBook": 3,
+  "rating": 5,
+  "full_review": "Un chef d'oeuvre!"
+}
+
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": "demo_user_alice",
+  "idBook": 3,
+  "rating": 2,
+  "full_review": "Je n'ai pas accroché à l'histoire."
+}
+
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": "demo_user_bob",
+  "idBook": 4,
+  "rating": 4,
+  "full_review": "Lecture agréable et bien écrite."
+}
+
+POST http://localhost:3000/review
+Content-Type: application/json
+
+{
+  "idUser": "demo_user_charlie",
+  "idBook": 4,
+  "rating": 1,
+  "full_review": "Je n'ai pas aimé ce livre."
+}
 ### AUTHOR
 POST http://localhost:3000/author
 Content-Type: application/json
