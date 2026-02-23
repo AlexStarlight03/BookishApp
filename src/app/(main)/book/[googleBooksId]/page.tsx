@@ -35,17 +35,19 @@ export default function BookDetailsPage({ params }: { params: { googleBooksId: s
           const googleBook = await fetchGoogleBookById(googleBooksId);
           if (googleBook && googleBook.volumeInfo) {
             bookData = {
+              idBook: -1,
               title: googleBook.volumeInfo.title || "Sans titre",
-              authors: googleBook.volumeInfo.authors || [],
+              authors: (googleBook.volumeInfo.authors || []).map((name: string) => ({ author: { name, idAuthor: -1 }, idBook: -1, idAuthor: -1 })),
               cover_img_url: googleBook.volumeInfo.imageLinks?.thumbnail || googleBook.volumeInfo.imageLinks?.smallThumbnail || null,
               description: googleBook.volumeInfo.description || "",
               nb_pages: googleBook.volumeInfo.pageCount || null,
               editor: googleBook.volumeInfo.publisher || null,
               googleBooksId: googleBook.id,
+              isbn: googleBook.volumeInfo.industryIdentifiers?.[0]?.identifier || null,
             };
           }
         } catch (e) {
-          // Optionally handle error
+          console.error("Erreur lors de la récupération du livre depuis Google Books :", e);
         }
       }
       setBook(bookData);
