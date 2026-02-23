@@ -75,7 +75,6 @@ const moveToTermines = async () => {
       await moveToTermines();
     } else {
       if (onStatusChange) onStatusChange("En cours");
-      if (typeof onUpdate === "function") onUpdate();
       if (typeof onClose === "function") onClose();
     }
   };
