@@ -1,5 +1,4 @@
 // src/components/UserInfo.tsx
-// FIXED: Added "use client" - useUser() is a client-only hook
 "use client";
 
 import { useUser } from "@stackframe/stack";

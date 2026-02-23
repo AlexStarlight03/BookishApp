@@ -46,7 +46,7 @@ export default function ExploreClient({ categories }: { categories: Category[] }
         };
       });
       setBooks(mappedBooks);
-      setTotalPages(Math.max(1, Math.ceil((data.totalItems || 1) / PAGE_SIZE)));
+      setTotalPages(Math.min(10, Math.max(1, Math.ceil((data.totalItems || 1) / PAGE_SIZE))));
     } catch (error) {
       console.error("Erreur lors de la récupération des livres :", error);
       setBooks([]);
