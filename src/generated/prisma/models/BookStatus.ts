@@ -29,21 +29,19 @@ export type AggregateBookStatus = {
 export type BookStatusAvgAggregateOutputType = {
   idBook: number | null
   idBookshelf: number | null
-  idUser: number | null
   currPage: number | null
 }
 
 export type BookStatusSumAggregateOutputType = {
   idBook: number | null
   idBookshelf: number | null
-  idUser: number | null
   currPage: number | null
 }
 
 export type BookStatusMinAggregateOutputType = {
   idBook: number | null
   idBookshelf: number | null
-  idUser: number | null
+  idUser: string | null
   dateStart: Date | null
   dateEnd: Date | null
   currPage: number | null
@@ -52,7 +50,7 @@ export type BookStatusMinAggregateOutputType = {
 export type BookStatusMaxAggregateOutputType = {
   idBook: number | null
   idBookshelf: number | null
-  idUser: number | null
+  idUser: string | null
   dateStart: Date | null
   dateEnd: Date | null
   currPage: number | null
@@ -72,14 +70,12 @@ export type BookStatusCountAggregateOutputType = {
 export type BookStatusAvgAggregateInputType = {
   idBook?: true
   idBookshelf?: true
-  idUser?: true
   currPage?: true
 }
 
 export type BookStatusSumAggregateInputType = {
   idBook?: true
   idBookshelf?: true
-  idUser?: true
   currPage?: true
 }
 
@@ -200,7 +196,7 @@ export type BookStatusGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type BookStatusGroupByOutputType = {
   idBook: number
   idBookshelf: number
-  idUser: number
+  idUser: string
   dateStart: Date | null
   dateEnd: Date | null
   currPage: number | null
@@ -232,7 +228,7 @@ export type BookStatusWhereInput = {
   NOT?: Prisma.BookStatusWhereInput | Prisma.BookStatusWhereInput[]
   idBook?: Prisma.IntFilter<"BookStatus"> | number
   idBookshelf?: Prisma.IntFilter<"BookStatus"> | number
-  idUser?: Prisma.IntFilter<"BookStatus"> | number
+  idUser?: Prisma.StringFilter<"BookStatus"> | string
   dateStart?: Prisma.DateTimeNullableFilter<"BookStatus"> | Date | string | null
   dateEnd?: Prisma.DateTimeNullableFilter<"BookStatus"> | Date | string | null
   currPage?: Prisma.IntNullableFilter<"BookStatus"> | number | null
@@ -260,7 +256,7 @@ export type BookStatusWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BookStatusWhereInput | Prisma.BookStatusWhereInput[]
   idBook?: Prisma.IntFilter<"BookStatus"> | number
   idBookshelf?: Prisma.IntFilter<"BookStatus"> | number
-  idUser?: Prisma.IntFilter<"BookStatus"> | number
+  idUser?: Prisma.StringFilter<"BookStatus"> | string
   dateStart?: Prisma.DateTimeNullableFilter<"BookStatus"> | Date | string | null
   dateEnd?: Prisma.DateTimeNullableFilter<"BookStatus"> | Date | string | null
   currPage?: Prisma.IntNullableFilter<"BookStatus"> | number | null
@@ -289,7 +285,7 @@ export type BookStatusScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BookStatusScalarWhereWithAggregatesInput | Prisma.BookStatusScalarWhereWithAggregatesInput[]
   idBook?: Prisma.IntWithAggregatesFilter<"BookStatus"> | number
   idBookshelf?: Prisma.IntWithAggregatesFilter<"BookStatus"> | number
-  idUser?: Prisma.IntWithAggregatesFilter<"BookStatus"> | number
+  idUser?: Prisma.StringWithAggregatesFilter<"BookStatus"> | string
   dateStart?: Prisma.DateTimeNullableWithAggregatesFilter<"BookStatus"> | Date | string | null
   dateEnd?: Prisma.DateTimeNullableWithAggregatesFilter<"BookStatus"> | Date | string | null
   currPage?: Prisma.IntNullableWithAggregatesFilter<"BookStatus"> | number | null
@@ -307,7 +303,7 @@ export type BookStatusCreateInput = {
 export type BookStatusUncheckedCreateInput = {
   idBook: number
   idBookshelf: number
-  idUser: number
+  idUser: string
   dateStart?: Date | string | null
   dateEnd?: Date | string | null
   currPage?: number | null
@@ -325,7 +321,7 @@ export type BookStatusUpdateInput = {
 export type BookStatusUncheckedUpdateInput = {
   idBook?: Prisma.IntFieldUpdateOperationsInput | number
   idBookshelf?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   dateStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dateEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -334,7 +330,7 @@ export type BookStatusUncheckedUpdateInput = {
 export type BookStatusCreateManyInput = {
   idBook: number
   idBookshelf: number
-  idUser: number
+  idUser: string
   dateStart?: Date | string | null
   dateEnd?: Date | string | null
   currPage?: number | null
@@ -349,7 +345,7 @@ export type BookStatusUpdateManyMutationInput = {
 export type BookStatusUncheckedUpdateManyInput = {
   idBook?: Prisma.IntFieldUpdateOperationsInput | number
   idBookshelf?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   dateStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dateEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -382,7 +378,6 @@ export type BookStatusCountOrderByAggregateInput = {
 export type BookStatusAvgOrderByAggregateInput = {
   idBook?: Prisma.SortOrder
   idBookshelf?: Prisma.SortOrder
-  idUser?: Prisma.SortOrder
   currPage?: Prisma.SortOrder
 }
 
@@ -407,7 +402,6 @@ export type BookStatusMinOrderByAggregateInput = {
 export type BookStatusSumOrderByAggregateInput = {
   idBook?: Prisma.SortOrder
   idBookshelf?: Prisma.SortOrder
-  idUser?: Prisma.SortOrder
   currPage?: Prisma.SortOrder
 }
 
@@ -551,7 +545,7 @@ export type BookStatusCreateWithoutBookInput = {
 
 export type BookStatusUncheckedCreateWithoutBookInput = {
   idBookshelf: number
-  idUser: number
+  idUser: string
   dateStart?: Date | string | null
   dateEnd?: Date | string | null
   currPage?: number | null
@@ -589,7 +583,7 @@ export type BookStatusScalarWhereInput = {
   NOT?: Prisma.BookStatusScalarWhereInput | Prisma.BookStatusScalarWhereInput[]
   idBook?: Prisma.IntFilter<"BookStatus"> | number
   idBookshelf?: Prisma.IntFilter<"BookStatus"> | number
-  idUser?: Prisma.IntFilter<"BookStatus"> | number
+  idUser?: Prisma.StringFilter<"BookStatus"> | string
   dateStart?: Prisma.DateTimeNullableFilter<"BookStatus"> | Date | string | null
   dateEnd?: Prisma.DateTimeNullableFilter<"BookStatus"> | Date | string | null
   currPage?: Prisma.IntNullableFilter<"BookStatus"> | number | null
@@ -647,7 +641,7 @@ export type BookStatusCreateWithoutBookshelfInput = {
 
 export type BookStatusUncheckedCreateWithoutBookshelfInput = {
   idBook: number
-  idUser: number
+  idUser: string
   dateStart?: Date | string | null
   dateEnd?: Date | string | null
   currPage?: number | null
@@ -681,7 +675,7 @@ export type BookStatusUpdateManyWithWhereWithoutBookshelfInput = {
 
 export type BookStatusCreateManyBookInput = {
   idBookshelf: number
-  idUser: number
+  idUser: string
   dateStart?: Date | string | null
   dateEnd?: Date | string | null
   currPage?: number | null
@@ -697,7 +691,7 @@ export type BookStatusUpdateWithoutBookInput = {
 
 export type BookStatusUncheckedUpdateWithoutBookInput = {
   idBookshelf?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   dateStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dateEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -705,7 +699,7 @@ export type BookStatusUncheckedUpdateWithoutBookInput = {
 
 export type BookStatusUncheckedUpdateManyWithoutBookInput = {
   idBookshelf?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   dateStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dateEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -745,7 +739,7 @@ export type BookStatusUncheckedUpdateManyWithoutUserInput = {
 
 export type BookStatusCreateManyBookshelfInput = {
   idBook: number
-  idUser: number
+  idUser: string
   dateStart?: Date | string | null
   dateEnd?: Date | string | null
   currPage?: number | null
@@ -761,7 +755,7 @@ export type BookStatusUpdateWithoutBookshelfInput = {
 
 export type BookStatusUncheckedUpdateWithoutBookshelfInput = {
   idBook?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   dateStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dateEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -769,7 +763,7 @@ export type BookStatusUncheckedUpdateWithoutBookshelfInput = {
 
 export type BookStatusUncheckedUpdateManyWithoutBookshelfInput = {
   idBook?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   dateStart?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   dateEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   currPage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -849,7 +843,7 @@ export type $BookStatusPayload<ExtArgs extends runtime.Types.Extensions.Internal
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     idBook: number
     idBookshelf: number
-    idUser: number
+    idUser: string
     dateStart: Date | null
     dateEnd: Date | null
     currPage: number | null
@@ -1281,7 +1275,7 @@ export interface Prisma__BookStatusClient<T, Null = never, ExtArgs extends runti
 export interface BookStatusFieldRefs {
   readonly idBook: Prisma.FieldRef<"BookStatus", 'Int'>
   readonly idBookshelf: Prisma.FieldRef<"BookStatus", 'Int'>
-  readonly idUser: Prisma.FieldRef<"BookStatus", 'Int'>
+  readonly idUser: Prisma.FieldRef<"BookStatus", 'String'>
   readonly dateStart: Prisma.FieldRef<"BookStatus", 'DateTime'>
   readonly dateEnd: Prisma.FieldRef<"BookStatus", 'DateTime'>
   readonly currPage: Prisma.FieldRef<"BookStatus", 'Int'>

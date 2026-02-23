@@ -1,45 +1,30 @@
+"use server";
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 
-
-export async function addBookCategory({ idCategory, idBook }: { idCategory: number, idBook: number }) {
+export async function createBookCategory({ idBook, idCategory }: { idBook: number, idCategory: number }) {
   try {
     if (!idBook || !idCategory) {
-      return NextResponse.json(
-        { success: false, message: "idBook et idCategory sont requis" },
-        { status: 400 }
-      );
+      return { success: false, message: "idBook et idCategory sont requis" };
     }
-
     const bookCategory = await prisma.bookCategory.create({
       data: {
         idBook,
         idCategory,
       },
     });
-
-    return NextResponse.json({ success: true, bookCategory }, { status: 201 });
+    return { success: true, bookCategory };
   } catch (error: any) {
     if (error.code === "P2002") {
-      return NextResponse.json(
-        { success: false, message: "Cette relation existe déjà" },
-        { status: 400 }
-      );
+      return { success: false, message: "Cette relation existe déjà" };
     }
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de l'ajout de la relation BookCategory", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de l'ajout de la relation BookCategory", error: error.message };
   }
 }
 
-export async function deleteBookCategory({ idCategory, idBook }: { idCategory: number, idBook: number }) {
+export async function deleteBookCategory({ idBook, idCategory }: { idBook: number, idCategory: number }) {
   try {
-    if (!idCategory || !idBook) {
-      return NextResponse.json(
-        { success: false, message: "Format d'identifiant invalide (attendu: idCategory-idBook)" },
-        { status: 400 }
-      );
+    if (!idBook || !idCategory) {
+      return { success: false, message: "Format d'identifiant invalide (attendu: idCategory-idBook)" };
     }
     await prisma.bookCategory.delete({
       where: {
@@ -49,61 +34,39 @@ export async function deleteBookCategory({ idCategory, idBook }: { idCategory: n
         },
       },
     });
-
-    return NextResponse.json({
-      success: true,
-      message: `Relation BookCategory supprimée (Category: ${idCategory}, Book: ${idBook})`,
-    }, { status: 200 });
+    return { success: true, message: `Relation BookCategory supprimée (Category: ${idCategory}, Book: ${idBook})` };
   } catch (error: any) {
     if (error.code === "P2025") {
-      return NextResponse.json(
-        { success: false, message: "Relation BookCategory non trouvée" },
-        { status: 404 }
-      );
+      return { success: false, message: "Relation BookCategory non trouvée" };
     }
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la suppression de la relation BookCategory", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la suppression de la relation BookCategory", error: error.message };
   }
 }
 
-export async function getCategoriesFromBook({ idBook }: { idBook: number }) {
+export async function getCategoriesForBook(idBook: number) {
   try {
     if (!idBook) {
-      return NextResponse.json(
-        { success: false, message: "Paramètre idBook manquant ou invalide" },
-        { status: 400 }
-      );
+      return { success: false, message: "Paramètre idBook manquant ou invalide" };
     }
     const categories = await prisma.bookCategory.findMany({
       where: { idBook },
     });
-    return NextResponse.json({ success: true, data: categories }, { status: 200 });
+    return { success: true, data: categories };
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la récupération des categories du livre", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la récupération des categories du livre", error: error.message };
   }
 }
 
-export async function getBooksFromCategory({ idCategory }: { idCategory: number } ) {
+export async function getBooksForCategory(idCategory: number) {
   try {
     if (!idCategory) {
-      return NextResponse.json(
-        { success: false, message: "Paramètre idCategory manquant ou invalide" },
-        { status: 400 }
-      );
+      return { success: false, message: "Paramètre idCategory manquant ou invalide" };
     }
     const books = await prisma.bookCategory.findMany({
       where: { idCategory },
     });
-    return NextResponse.json({ success: true, data: books }, { status: 200 });
+    return { success: true, data: books };
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la récupération des livres de la categorie", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la récupération des livres de la categorie", error: error.message };
   }
 }

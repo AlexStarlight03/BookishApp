@@ -21,7 +21,7 @@ model Book {
   description     String?
   isbn            String?   @unique
   cover_img_url   String?
-  googleBooksId   String?
+  googleBooksId   String?   @unique
 
   reviews         Review[]
   authors         BookAuthor[]
@@ -30,13 +30,13 @@ model Book {
 }
 
 model User {
-  idUser          Int       @id @default(autoincrement())
-  stackAuthId     String    @unique
+  idUser          String    @id //stackAuthId
   username        String    @unique
   avatar          String?
   email           String    @unique
   createdAt       DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  updatedAt       DateTime  @updatedAt
+  yearlyGoal      Int?
 
   bookshelves     Bookshelf[]
   reviews         Review[]
@@ -45,7 +45,7 @@ model User {
 
 model Bookshelf {
   idBookshelf      Int       @id @default(autoincrement())
-  idUser           Int
+  idUser           String
   name             String
   description      String?
 
@@ -56,7 +56,7 @@ model Bookshelf {
 model BookStatus {
   idBook           Int
   idBookshelf      Int
-  idUser           Int
+  idUser           String
   dateStart        DateTime?
   dateEnd          DateTime?
   currPage         Int?
@@ -88,7 +88,6 @@ model BookCategory {
 model Author {
   idAuthor         Int       @id @default(autoincrement())
   name             String?
-  lastName         String?
 
   authorBooks      BookAuthor[]
 }
@@ -105,7 +104,7 @@ model BookAuthor {
 
 model Review {
   idReview         Int       @id @default(autoincrement())
-  idUser           Int
+  idUser           String
   idBook           Int
   rating           Int
   full_review      String?

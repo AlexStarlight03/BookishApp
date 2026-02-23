@@ -11,7 +11,7 @@ export function LoginButton() {
     return (
       <Link 
         href="/dashboard"
-        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        className="book-button bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold px-6 py-2 rounded-full shadow-lg hover:scale-105 transition-all"
       >
         Dashboard
       </Link>
@@ -21,7 +21,7 @@ export function LoginButton() {
   return (
     <Link 
       href="/handler/sign-in"
-      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      className="book-button bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-bold px-6 py-2 rounded-full shadow-lg hover:scale-105 transition-all"
     >
       Se connecter
     </Link>

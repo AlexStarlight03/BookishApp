@@ -268,6 +268,7 @@ export type BookOrderByWithRelationInput = {
 export type BookWhereUniqueInput = Prisma.AtLeast<{
   idBook?: number
   isbn?: string
+  googleBooksId?: string
   AND?: Prisma.BookWhereInput | Prisma.BookWhereInput[]
   OR?: Prisma.BookWhereInput[]
   NOT?: Prisma.BookWhereInput | Prisma.BookWhereInput[]
@@ -276,12 +277,11 @@ export type BookWhereUniqueInput = Prisma.AtLeast<{
   nb_pages?: Prisma.IntNullableFilter<"Book"> | number | null
   description?: Prisma.StringNullableFilter<"Book"> | string | null
   cover_img_url?: Prisma.StringNullableFilter<"Book"> | string | null
-  googleBooksId?: Prisma.StringNullableFilter<"Book"> | string | null
   reviews?: Prisma.ReviewListRelationFilter
   authors?: Prisma.BookAuthorListRelationFilter
   categories?: Prisma.BookCategoryListRelationFilter
   bookStatus?: Prisma.BookStatusListRelationFilter
-}, "idBook" | "isbn">
+}, "idBook" | "isbn" | "googleBooksId">
 
 export type BookOrderByWithAggregationInput = {
   idBook?: Prisma.SortOrder

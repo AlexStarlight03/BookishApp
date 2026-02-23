@@ -37,19 +37,16 @@ export type AuthorSumAggregateOutputType = {
 export type AuthorMinAggregateOutputType = {
   idAuthor: number | null
   name: string | null
-  lastName: string | null
 }
 
 export type AuthorMaxAggregateOutputType = {
   idAuthor: number | null
   name: string | null
-  lastName: string | null
 }
 
 export type AuthorCountAggregateOutputType = {
   idAuthor: number
   name: number
-  lastName: number
   _all: number
 }
 
@@ -65,19 +62,16 @@ export type AuthorSumAggregateInputType = {
 export type AuthorMinAggregateInputType = {
   idAuthor?: true
   name?: true
-  lastName?: true
 }
 
 export type AuthorMaxAggregateInputType = {
   idAuthor?: true
   name?: true
-  lastName?: true
 }
 
 export type AuthorCountAggregateInputType = {
   idAuthor?: true
   name?: true
-  lastName?: true
   _all?: true
 }
 
@@ -170,7 +164,6 @@ export type AuthorGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type AuthorGroupByOutputType = {
   idAuthor: number
   name: string | null
-  lastName: string | null
   _count: AuthorCountAggregateOutputType | null
   _avg: AuthorAvgAggregateOutputType | null
   _sum: AuthorSumAggregateOutputType | null
@@ -199,14 +192,12 @@ export type AuthorWhereInput = {
   NOT?: Prisma.AuthorWhereInput | Prisma.AuthorWhereInput[]
   idAuthor?: Prisma.IntFilter<"Author"> | number
   name?: Prisma.StringNullableFilter<"Author"> | string | null
-  lastName?: Prisma.StringNullableFilter<"Author"> | string | null
   authorBooks?: Prisma.BookAuthorListRelationFilter
 }
 
 export type AuthorOrderByWithRelationInput = {
   idAuthor?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   authorBooks?: Prisma.BookAuthorOrderByRelationAggregateInput
 }
 
@@ -216,14 +207,12 @@ export type AuthorWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.AuthorWhereInput[]
   NOT?: Prisma.AuthorWhereInput | Prisma.AuthorWhereInput[]
   name?: Prisma.StringNullableFilter<"Author"> | string | null
-  lastName?: Prisma.StringNullableFilter<"Author"> | string | null
   authorBooks?: Prisma.BookAuthorListRelationFilter
 }, "idAuthor">
 
 export type AuthorOrderByWithAggregationInput = {
   idAuthor?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
-  lastName?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.AuthorCountOrderByAggregateInput
   _avg?: Prisma.AuthorAvgOrderByAggregateInput
   _max?: Prisma.AuthorMaxOrderByAggregateInput
@@ -237,56 +226,47 @@ export type AuthorScalarWhereWithAggregatesInput = {
   NOT?: Prisma.AuthorScalarWhereWithAggregatesInput | Prisma.AuthorScalarWhereWithAggregatesInput[]
   idAuthor?: Prisma.IntWithAggregatesFilter<"Author"> | number
   name?: Prisma.StringNullableWithAggregatesFilter<"Author"> | string | null
-  lastName?: Prisma.StringNullableWithAggregatesFilter<"Author"> | string | null
 }
 
 export type AuthorCreateInput = {
   name?: string | null
-  lastName?: string | null
   authorBooks?: Prisma.BookAuthorCreateNestedManyWithoutAuthorInput
 }
 
 export type AuthorUncheckedCreateInput = {
   idAuthor?: number
   name?: string | null
-  lastName?: string | null
   authorBooks?: Prisma.BookAuthorUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type AuthorUpdateInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorBooks?: Prisma.BookAuthorUpdateManyWithoutAuthorNestedInput
 }
 
 export type AuthorUncheckedUpdateInput = {
   idAuthor?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   authorBooks?: Prisma.BookAuthorUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type AuthorCreateManyInput = {
   idAuthor?: number
   name?: string | null
-  lastName?: string | null
 }
 
 export type AuthorUpdateManyMutationInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type AuthorUncheckedUpdateManyInput = {
   idAuthor?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type AuthorCountOrderByAggregateInput = {
   idAuthor?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  lastName?: Prisma.SortOrder
 }
 
 export type AuthorAvgOrderByAggregateInput = {
@@ -296,13 +276,11 @@ export type AuthorAvgOrderByAggregateInput = {
 export type AuthorMaxOrderByAggregateInput = {
   idAuthor?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  lastName?: Prisma.SortOrder
 }
 
 export type AuthorMinOrderByAggregateInput = {
   idAuthor?: Prisma.SortOrder
   name?: Prisma.SortOrder
-  lastName?: Prisma.SortOrder
 }
 
 export type AuthorSumOrderByAggregateInput = {
@@ -330,13 +308,11 @@ export type AuthorUpdateOneRequiredWithoutAuthorBooksNestedInput = {
 
 export type AuthorCreateWithoutAuthorBooksInput = {
   name?: string | null
-  lastName?: string | null
 }
 
 export type AuthorUncheckedCreateWithoutAuthorBooksInput = {
   idAuthor?: number
   name?: string | null
-  lastName?: string | null
 }
 
 export type AuthorCreateOrConnectWithoutAuthorBooksInput = {
@@ -357,13 +333,11 @@ export type AuthorUpdateToOneWithWhereWithoutAuthorBooksInput = {
 
 export type AuthorUpdateWithoutAuthorBooksInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type AuthorUncheckedUpdateWithoutAuthorBooksInput = {
   idAuthor?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  lastName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -400,7 +374,6 @@ export type AuthorCountOutputTypeCountAuthorBooksArgs<ExtArgs extends runtime.Ty
 export type AuthorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   idAuthor?: boolean
   name?: boolean
-  lastName?: boolean
   authorBooks?: boolean | Prisma.Author$authorBooksArgs<ExtArgs>
   _count?: boolean | Prisma.AuthorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["author"]>
@@ -408,22 +381,19 @@ export type AuthorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type AuthorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   idAuthor?: boolean
   name?: boolean
-  lastName?: boolean
 }, ExtArgs["result"]["author"]>
 
 export type AuthorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   idAuthor?: boolean
   name?: boolean
-  lastName?: boolean
 }, ExtArgs["result"]["author"]>
 
 export type AuthorSelectScalar = {
   idAuthor?: boolean
   name?: boolean
-  lastName?: boolean
 }
 
-export type AuthorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idAuthor" | "name" | "lastName", ExtArgs["result"]["author"]>
+export type AuthorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idAuthor" | "name", ExtArgs["result"]["author"]>
 export type AuthorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   authorBooks?: boolean | Prisma.Author$authorBooksArgs<ExtArgs>
   _count?: boolean | Prisma.AuthorCountOutputTypeDefaultArgs<ExtArgs>
@@ -439,7 +409,6 @@ export type $AuthorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     idAuthor: number
     name: string | null
-    lastName: string | null
   }, ExtArgs["result"]["author"]>
   composites: {}
 }
@@ -866,7 +835,6 @@ export interface Prisma__AuthorClient<T, Null = never, ExtArgs extends runtime.T
 export interface AuthorFieldRefs {
   readonly idAuthor: Prisma.FieldRef<"Author", 'Int'>
   readonly name: Prisma.FieldRef<"Author", 'String'>
-  readonly lastName: Prisma.FieldRef<"Author", 'String'>
 }
     
 

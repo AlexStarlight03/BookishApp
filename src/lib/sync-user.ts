@@ -11,19 +11,39 @@ export async function syncUserWithDatabase() {
 
   // Upsert: créer ou mettre à jour l'utilisateur
   const user = await prisma.user.upsert({
-    where: { stackAuthId: stackUser.id },
+    where: { idUser: stackUser.id },
     update: {
       email: stackUser.primaryEmail || "",
       username: stackUser.displayName || "",
       avatar: stackUser.profileImageUrl || null,
     },
     create: {
-      stackAuthId: stackUser.id,
+      idUser: stackUser.id,
       email: stackUser.primaryEmail || "",
       username: stackUser.displayName || "",
       avatar: stackUser.profileImageUrl || null,
     },
   });
+
+  // Créer les bookshelves par défaut si l'utilisateur vient d'être créé
+  if (user.createdAt.getTime() === user.updatedAt.getTime()) {
+    const defaultBookshelves = [
+      { name: "À lire", description: "Livres que je souhaite lire" },
+      { name: "En cours", description: "Livres que je suis en train de lire" },
+      { name: "Terminés", description: "Livres que j'ai terminés" },
+    ];
+    await Promise.all(
+      defaultBookshelves.map((shelf) =>
+        prisma.bookshelf.create({
+          data: {
+            idUser: user.idUser,
+            name: shelf.name,
+            description: shelf.description,
+          },
+        })
+      )
+    );
+  }
 
   return user;
 }

@@ -27,81 +27,81 @@ export type AggregateUser = {
 }
 
 export type UserAvgAggregateOutputType = {
-  idUser: number | null
+  yearlyGoal: number | null
 }
 
 export type UserSumAggregateOutputType = {
-  idUser: number | null
+  yearlyGoal: number | null
 }
 
 export type UserMinAggregateOutputType = {
-  idUser: number | null
-  stackAuthId: string | null
+  idUser: string | null
   username: string | null
   avatar: string | null
   email: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  yearlyGoal: number | null
 }
 
 export type UserMaxAggregateOutputType = {
-  idUser: number | null
-  stackAuthId: string | null
+  idUser: string | null
   username: string | null
   avatar: string | null
   email: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  yearlyGoal: number | null
 }
 
 export type UserCountAggregateOutputType = {
   idUser: number
-  stackAuthId: number
   username: number
   avatar: number
   email: number
   createdAt: number
   updatedAt: number
+  yearlyGoal: number
   _all: number
 }
 
 
 export type UserAvgAggregateInputType = {
-  idUser?: true
+  yearlyGoal?: true
 }
 
 export type UserSumAggregateInputType = {
-  idUser?: true
+  yearlyGoal?: true
 }
 
 export type UserMinAggregateInputType = {
   idUser?: true
-  stackAuthId?: true
   username?: true
   avatar?: true
   email?: true
   createdAt?: true
   updatedAt?: true
+  yearlyGoal?: true
 }
 
 export type UserMaxAggregateInputType = {
   idUser?: true
-  stackAuthId?: true
   username?: true
   avatar?: true
   email?: true
   createdAt?: true
   updatedAt?: true
+  yearlyGoal?: true
 }
 
 export type UserCountAggregateInputType = {
   idUser?: true
-  stackAuthId?: true
   username?: true
   avatar?: true
   email?: true
   createdAt?: true
   updatedAt?: true
+  yearlyGoal?: true
   _all?: true
 }
 
@@ -192,13 +192,13 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 export type UserGroupByOutputType = {
-  idUser: number
-  stackAuthId: string
+  idUser: string
   username: string
   avatar: string | null
   email: string
   createdAt: Date
   updatedAt: Date
+  yearlyGoal: number | null
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -225,13 +225,13 @@ export type UserWhereInput = {
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  idUser?: Prisma.IntFilter<"User"> | number
-  stackAuthId?: Prisma.StringFilter<"User"> | string
+  idUser?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  yearlyGoal?: Prisma.IntNullableFilter<"User"> | number | null
   bookshelves?: Prisma.BookshelfListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   booksStatus?: Prisma.BookStatusListRelationFilter
@@ -239,20 +239,19 @@ export type UserWhereInput = {
 
 export type UserOrderByWithRelationInput = {
   idUser?: Prisma.SortOrder
-  stackAuthId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  yearlyGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   bookshelves?: Prisma.BookshelfOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   booksStatus?: Prisma.BookStatusOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
-  idUser?: number
-  stackAuthId?: string
+  idUser?: string
   username?: string
   email?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -261,19 +260,20 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  yearlyGoal?: Prisma.IntNullableFilter<"User"> | number | null
   bookshelves?: Prisma.BookshelfListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   booksStatus?: Prisma.BookStatusListRelationFilter
-}, "idUser" | "stackAuthId" | "username" | "email">
+}, "idUser" | "username" | "email">
 
 export type UserOrderByWithAggregationInput = {
   idUser?: Prisma.SortOrder
-  stackAuthId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  yearlyGoal?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -285,130 +285,133 @@ export type UserScalarWhereWithAggregatesInput = {
   AND?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
   OR?: Prisma.UserScalarWhereWithAggregatesInput[]
   NOT?: Prisma.UserScalarWhereWithAggregatesInput | Prisma.UserScalarWhereWithAggregatesInput[]
-  idUser?: Prisma.IntWithAggregatesFilter<"User"> | number
-  stackAuthId?: Prisma.StringWithAggregatesFilter<"User"> | string
+  idUser?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   avatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  yearlyGoal?: Prisma.IntNullableWithAggregatesFilter<"User"> | number | null
 }
 
 export type UserCreateInput = {
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   bookshelves?: Prisma.BookshelfCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   booksStatus?: Prisma.BookStatusCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
-  idUser?: number
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   bookshelves?: Prisma.BookshelfUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   booksStatus?: Prisma.BookStatusUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bookshelves?: Prisma.BookshelfUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   booksStatus?: Prisma.BookStatusUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bookshelves?: Prisma.BookshelfUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   booksStatus?: Prisma.BookStatusUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
-  idUser?: number
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
 }
 
 export type UserUpdateManyMutationInput = {
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserUncheckedUpdateManyInput = {
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type UserCountOrderByAggregateInput = {
   idUser?: Prisma.SortOrder
-  stackAuthId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  yearlyGoal?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
-  idUser?: Prisma.SortOrder
+  yearlyGoal?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   idUser?: Prisma.SortOrder
-  stackAuthId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  yearlyGoal?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   idUser?: Prisma.SortOrder
-  stackAuthId?: Prisma.SortOrder
   username?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
   email?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  yearlyGoal?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
-  idUser?: Prisma.SortOrder
+  yearlyGoal?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -463,24 +466,25 @@ export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
 }
 
 export type UserCreateWithoutBookshelvesInput = {
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   booksStatus?: Prisma.BookStatusCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBookshelvesInput = {
-  idUser?: number
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   booksStatus?: Prisma.BookStatusUncheckedCreateNestedManyWithoutUserInput
 }
@@ -502,47 +506,49 @@ export type UserUpdateToOneWithWhereWithoutBookshelvesInput = {
 }
 
 export type UserUpdateWithoutBookshelvesInput = {
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   booksStatus?: Prisma.BookStatusUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBookshelvesInput = {
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   booksStatus?: Prisma.BookStatusUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBooksStatusInput = {
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   bookshelves?: Prisma.BookshelfCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBooksStatusInput = {
-  idUser?: number
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   bookshelves?: Prisma.BookshelfUncheckedCreateNestedManyWithoutUserInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
 }
@@ -564,47 +570,49 @@ export type UserUpdateToOneWithWhereWithoutBooksStatusInput = {
 }
 
 export type UserUpdateWithoutBooksStatusInput = {
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bookshelves?: Prisma.BookshelfUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBooksStatusInput = {
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bookshelves?: Prisma.BookshelfUncheckedUpdateManyWithoutUserNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   bookshelves?: Prisma.BookshelfCreateNestedManyWithoutUserInput
   booksStatus?: Prisma.BookStatusCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
-  idUser?: number
-  stackAuthId: string
+  idUser: string
   username: string
   avatar?: string | null
   email: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  yearlyGoal?: number | null
   bookshelves?: Prisma.BookshelfUncheckedCreateNestedManyWithoutUserInput
   booksStatus?: Prisma.BookStatusUncheckedCreateNestedManyWithoutUserInput
 }
@@ -626,24 +634,25 @@ export type UserUpdateToOneWithWhereWithoutReviewsInput = {
 }
 
 export type UserUpdateWithoutReviewsInput = {
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bookshelves?: Prisma.BookshelfUpdateManyWithoutUserNestedInput
   booksStatus?: Prisma.BookStatusUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
-  stackAuthId?: Prisma.StringFieldUpdateOperationsInput | string
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  yearlyGoal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   bookshelves?: Prisma.BookshelfUncheckedUpdateManyWithoutUserNestedInput
   booksStatus?: Prisma.BookStatusUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -699,12 +708,12 @@ export type UserCountOutputTypeCountBooksStatusArgs<ExtArgs extends runtime.Type
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   idUser?: boolean
-  stackAuthId?: boolean
   username?: boolean
   avatar?: boolean
   email?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  yearlyGoal?: boolean
   bookshelves?: boolean | Prisma.User$bookshelvesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   booksStatus?: boolean | Prisma.User$booksStatusArgs<ExtArgs>
@@ -713,35 +722,35 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   idUser?: boolean
-  stackAuthId?: boolean
   username?: boolean
   avatar?: boolean
   email?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  yearlyGoal?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   idUser?: boolean
-  stackAuthId?: boolean
   username?: boolean
   avatar?: boolean
   email?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  yearlyGoal?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   idUser?: boolean
-  stackAuthId?: boolean
   username?: boolean
   avatar?: boolean
   email?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  yearlyGoal?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idUser" | "stackAuthId" | "username" | "avatar" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"idUser" | "username" | "avatar" | "email" | "createdAt" | "updatedAt" | "yearlyGoal", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   bookshelves?: boolean | Prisma.User$bookshelvesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
@@ -759,13 +768,13 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     booksStatus: Prisma.$BookStatusPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    idUser: number
-    stackAuthId: string
+    idUser: string
     username: string
     avatar: string | null
     email: string
     createdAt: Date
     updatedAt: Date
+    yearlyGoal: number | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1192,13 +1201,13 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the User model
  */
 export interface UserFieldRefs {
-  readonly idUser: Prisma.FieldRef<"User", 'Int'>
-  readonly stackAuthId: Prisma.FieldRef<"User", 'String'>
+  readonly idUser: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly avatar: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly yearlyGoal: Prisma.FieldRef<"User", 'Int'>
 }
     
 
