@@ -21,7 +21,7 @@ export default function UpdateReadingButton({
       if (showForm && googleBooksId) {
         const { getBookById } = await import("@/app/actions/book");
         const data = await getBookById({ googleBooksId });
-        const bookData = data.book || data.data;
+        const bookData = data.book;
         const bookshelfEntry = userBookshelves
           .flatMap(shelf =>
             (shelf.booksBookshelf || []).map((bookShelfEntry: any) => ({
