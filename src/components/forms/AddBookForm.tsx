@@ -51,7 +51,7 @@ export default function AddBookForm({
 
     if (currentBookshelfId && shelfId && String(shelfId) !== String(currentBookshelfId)) {
       const bookRes = await getBookById({ googleBooksId });
-      const idBook = bookRes.book?.idBook || bookRes.data?.idBook;
+      const idBook = bookRes.book?.idBook;
       if (!idBook) { setError("Impossible de trouver l'id du livre."); setLoading(false); return; }
       const patchRes = await modifyBookStatus(
         { idBookshelf: currentBookshelfId, idBook },
