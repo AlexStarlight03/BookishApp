@@ -20,7 +20,7 @@ export default async function BookDetailsPage({ params }: { params: { googleBook
   if (book) {
     const reviewsData = await getReviewsFromBook({ googleBooksId });
     reviews = reviewsData?.reviews || [];
-    averageRating = reviewsData?.averageRating || 0;
+    averageRating = typeof reviewsData?.averageRating === "number" ? reviewsData.averageRating : 0;
   }
 
   if (!book) return <div>Chargement...</div>;
