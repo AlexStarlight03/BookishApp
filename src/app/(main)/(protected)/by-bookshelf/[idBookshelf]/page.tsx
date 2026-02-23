@@ -46,7 +46,7 @@ export default function BookshelfPage(context : { params: Promise<{ idBookshelf:
         setName(shelfResult.data.name);
         setDescription(shelfResult.data.description || "");
         const booksResult = await getBooksFromBookshelf({ idBookshelf: Number(idBookshelf) });
-        setBooks(booksResult?.data || booksResult?.books || []);
+         setBooks(booksResult?.data || []);
       } catch (error) {
         alert("Erreur lors du chargement de l'étagère.");
         setBookshelf(null);
