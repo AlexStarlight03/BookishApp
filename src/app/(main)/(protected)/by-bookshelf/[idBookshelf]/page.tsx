@@ -69,7 +69,7 @@ export default function BookshelfPage(context : { params: Promise<{ idBookshelf:
 
   const handleEdit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await modifyBookshelf(null, { id: Number(idBookshelf) }, { name, description });
+    await modifyBookshelf({ id: Number(idBookshelf) }, { name, description });
     setEditMode(false);
     setBookshelf({ ...bookshelf, name, description });
   };
