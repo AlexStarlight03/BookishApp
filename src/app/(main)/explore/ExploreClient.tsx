@@ -68,6 +68,7 @@ export default function ExploreClient({ categories }: { categories: Category[] }
     setPage(1);
   };
 
+  console.log('ExploreClient Pagination debug:', { page, totalPages, booksLength: books.length });
   return (
     <div className="main-block bg-card">
       <h1 className="book-title text-center">Explorer les livres</h1>

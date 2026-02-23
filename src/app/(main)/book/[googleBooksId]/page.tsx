@@ -1,29 +1,73 @@
+"use client";
 import { getBookById } from "@/app/actions/book";
+import { fetchGoogleBookById } from "@/app/actions/fetchGoogleBookById";
 import ReviewCard from "@/components/ui/ReviewCard";
+import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 import StarsRating from "@/components/ui/StarsRating";
 import ClientBookActions from "@/components/ClientBookActions";
 import { getReviewsFromBook } from "@/app/actions/review";
 
-export default async function BookDetailsPage({ params }: { params: { googleBooksId: string } | Promise<{ googleBooksId: string }> }) {
-  let googleBooksId: string;
+const ReviewBookForm = dynamic(() => import("@/components/forms/ReviewBookForm"), { ssr: false });
+
+import { use } from "react";
+
+export default function BookDetailsPage({ params }: { params: { googleBooksId: string } | Promise<{ googleBooksId: string }> }) {
+  let googleBooksId = "";
   if (typeof (params as any).then === "function") {
-    params = await params;
+    const resolvedParams = use(params as Promise<{ googleBooksId: string }>);
+    googleBooksId = resolvedParams.googleBooksId;
+  } else {
+    googleBooksId = (params as { googleBooksId: string }).googleBooksId;
   }
-  googleBooksId = (params as { googleBooksId: string }).googleBooksId;
-  if (!googleBooksId) {
-    return <div>Paramètre googleBooksId manquant ou invalide</div>;
-  }
-  const bookResult = await getBookById({ googleBooksId });
-  const book = bookResult?.book || null;
-  let reviews: any[] = [];
-  let averageRating = 0;
-  if (book) {
-    const reviewsData = await getReviewsFromBook({ googleBooksId });
-    reviews = reviewsData?.reviews || [];
-    averageRating = (reviewsData && "averageRating" in reviewsData && typeof (reviewsData as any).averageRating === "number") ? (reviewsData as any).averageRating : 0;
-  }
+  const [editReview, setEditReview] = useState<any | null>(null);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [book, setBook] = useState<any>(null);
+  const [averageRating, setAverageRating] = useState<number>(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      let bookResult = await getBookById({ googleBooksId });
+      let bookData = bookResult?.book || null;
+      if (!bookData) {
+        try {
+          const googleBook = await fetchGoogleBookById(googleBooksId);
+          if (googleBook && googleBook.volumeInfo) {
+            bookData = {
+              idBook: -1,
+              title: googleBook.volumeInfo.title || "Sans titre",
+              authors: (googleBook.volumeInfo.authors || []).map((name: string) => ({ author: { name, idAuthor: -1 }, idBook: -1, idAuthor: -1 })),
+              cover_img_url: googleBook.volumeInfo.imageLinks?.thumbnail || googleBook.volumeInfo.imageLinks?.smallThumbnail || null,
+              description: googleBook.volumeInfo.description || "",
+              nb_pages: googleBook.volumeInfo.pageCount || null,
+              editor: googleBook.volumeInfo.publisher || null,
+              googleBooksId: googleBook.id,
+              isbn: googleBook.volumeInfo.industryIdentifiers?.[0]?.identifier || null,
+            };
+          }
+        } catch (e) {
+          console.error("Erreur lors de la récupération du livre depuis Google Books :", e);
+        }
+      }
+      setBook(bookData);
+      const reviewsData = await getReviewsFromBook({ googleBooksId });
+      setReviews(reviewsData?.reviews || []);
+      setAverageRating((reviewsData && "averageRating" in reviewsData && typeof (reviewsData as any).averageRating === "number") ? (reviewsData as any).averageRating : 0);
+    }
+    fetchData();
+  }, [googleBooksId]);
 
   if (!book) return <div>Chargement...</div>;
+
+  const handleEdit = (review: any) => {
+    setEditReview(review);
+    setShowEditModal(true);
+  };
+  const handleCloseEdit = () => {
+    setShowEditModal(false);
+    setEditReview(null);
+  };
 
   return (
     <div className="main-block bg-card">
@@ -49,12 +93,21 @@ export default async function BookDetailsPage({ params }: { params: { googleBook
         <h2 className="text-2xl font-semibold mb-4">Avis des utilisateurs</h2>
         {reviews.length > 0 ? (
         reviews.map((review: any) => (
-            <ReviewCard key={review.idReview} review={review} />
+          <ReviewCard key={review.idReview} review={review} onEdit={handleEdit} />
         ))
         ) : (
           <div>Aucun avis pour ce livre.</div>
         )}
       </div>
+      {showEditModal && editReview && (
+        <ReviewBookForm
+          googleBooksId={googleBooksId}
+          onClose={handleCloseEdit}
+          reviewId={editReview.idReview}
+          initialRating={editReview.rating}
+          initialReview={editReview.full_review}
+        />
+      )}
     </div>
   );
 }

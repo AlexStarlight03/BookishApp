@@ -1,19 +1,23 @@
 
 "use client";
 import { useState } from "react";
+import { useUser } from "@stackframe/stack";
 
 type Review = {
   idReview: number;
+  idUser: string;
   rating: number;
   full_review?: string;
   createdAt: string;
   user: {
     username: string | null;
+    avatar?: string | null;
   };
 };
 
 export default function ReviewCard({ review, onEdit, onDelete }: { review: Review, onEdit?: (review: Review) => void, onDelete?: (id: number) => void }) {
   const [deleting, setDeleting] = useState(false);
+  const user = useUser();
 
   const handleDelete = async () => {
     if (!window.confirm("Voulez-vous vraiment supprimer cette critique ?")) return;
@@ -23,6 +27,8 @@ export default function ReviewCard({ review, onEdit, onDelete }: { review: Revie
     setDeleting(false);
     if (onDelete) onDelete(review.idReview);
   };
+
+  const isOwner = user && review.idUser && (user.id === review.idUser);
 
   return (
     <div className="bg-gradient-to-br from-white via-card to-gray-100 rounded-2xl shadow-lg p-6 mb-6 border border-gray-200">
@@ -42,21 +48,23 @@ export default function ReviewCard({ review, onEdit, onDelete }: { review: Revie
         </span>
       </div>
       <div className="text-gray-700 mt-2 text-base font-normal min-h-[2rem]">{review.full_review || <i>Aucun commentaire</i>}</div>
-      <div className="flex gap-3 mt-4 justify-end">
-        <button
-          className="book-button bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-full text-sm shadow-md"
-          onClick={() => onEdit && onEdit(review)}
-        >
-          Modifier
-        </button>
-        <button
-          className="book-button bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-full text-sm shadow-md"
-          onClick={handleDelete}
-          disabled={deleting}
-        >
-          {deleting ? "Suppression..." : "Supprimer"}
-        </button>
-      </div>
+      { isOwner && (
+        <div className="flex gap-2 mt-4 justify-end">
+          <button
+            className="book-button bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-full text-xs shadow-md"
+            onClick={() => onEdit && onEdit(review)}
+          >
+            Modifier
+          </button>
+          <button
+            className="book-button bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-xs shadow-md"
+            onClick={handleDelete}
+            disabled={deleting}
+          >
+            {deleting ? "Suppression..." : "Supprimer"}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

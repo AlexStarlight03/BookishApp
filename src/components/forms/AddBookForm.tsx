@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { getBookshelvesByUserId, createBookshelf } from "@/app/actions/bookshelf";
+import { createBookshelf } from "@/app/actions/bookshelf";
 import { getBookById } from "@/app/actions/book";
 import { createBookStatus, modifyBookStatus } from "@/app/actions/bookStatus";
 import { useUser } from "@stackframe/stack";
