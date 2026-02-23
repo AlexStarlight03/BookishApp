@@ -1133,12 +1133,12 @@ export type BookScalarFieldEnum = (typeof BookScalarFieldEnum)[keyof typeof Book
 
 export const UserScalarFieldEnum = {
   idUser: 'idUser',
-  stackAuthId: 'stackAuthId',
   username: 'username',
   avatar: 'avatar',
   email: 'email',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  yearlyGoal: 'yearlyGoal'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1184,8 +1184,7 @@ export type BookCategoryScalarFieldEnum = (typeof BookCategoryScalarFieldEnum)[k
 
 export const AuthorScalarFieldEnum = {
   idAuthor: 'idAuthor',
-  name: 'name',
-  lastName: 'lastName'
+  name: 'name'
 } as const
 
 export type AuthorScalarFieldEnum = (typeof AuthorScalarFieldEnum)[keyof typeof AuthorScalarFieldEnum]

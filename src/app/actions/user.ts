@@ -1,18 +1,33 @@
+"use server";
 import prisma from "@/lib/prisma";
 import { requireAuth } from "@/lib/auth-utils";
-import { NextResponse } from "next/server";
+
+export async function updateYearlyGoal({ yearlyGoal }: { yearlyGoal: number }) {
+  const user = await requireAuth();
+  if (!user || !user.email) {
+    return { success: false, message: "Utilisateur non authentifié" };
+  }
+  if (typeof yearlyGoal !== "number" || yearlyGoal < 1) {
+    return { success: false, message: "Objectif invalide" };
+  }
+  const updated = await prisma.user.update({
+    where: { email: user.email },
+    data: { yearlyGoal },
+  });
+  return { success: true, data: updated };
+}
 
 export async function getUsers() {
   const users = await prisma.user.findMany({
     select: { idUser: true, username: true, email: true, avatar: true, createdAt: true },
   });
-  return NextResponse.json({ success: true, data: users }, { status: 200 });
+  return { success: true, data: users };
 }
 
 export async function getCurrentUser() {
   const user = await requireAuth();
   const dbUser = await prisma.user.findUnique({ where: { email: user.email } });
-  return NextResponse.json({ success: true, data: dbUser });
+  return { success: true, data: dbUser };
 }
 
 export async function updateUser({ username, avatar }: { username?: string; avatar?: string }) {
@@ -21,47 +36,68 @@ export async function updateUser({ username, avatar }: { username?: string; avat
     where: { email: user.email },
     data: { ...(username && { username }), ...(avatar && { avatar }) },
   });
-  return NextResponse.json({ success: true, data: updated });
+  return { success: true, data: updated };
 }
 
-export async function deleteUser() {
+export async function deleteUser({ idUser }: { idUser: string }) {
   const user = await requireAuth();
-  await prisma.user.delete({ where: { email: user.email } });
-  return NextResponse.json({ success: true, message: "Utilisateur supprimé avec succès" }, { status: 200 });
+  await prisma.user.delete({ where: { idUser} });
+  return { success: true, message: "Utilisateur supprimé avec succès" };
 }
 
-export async function getUserById({ id }: { id: number }) {
+export async function getUserById({ id }: { id: string }) {
   const user = await prisma.user.findUnique({
     where: { idUser: id },
-    select: { idUser: true, username: true, email: true, avatar: true, createdAt: true },
+    select: { idUser: true, username: true, email: true, avatar: true, createdAt: true, yearlyGoal: true },
   });
   if (!user) {
-    return NextResponse.json({ success: false, message: "Utilisateur non trouvé" }, { status: 404 });
+    return { success: false, message: "Utilisateur non trouvé" };
   }
-  return NextResponse.json({ success: true, data: user }, { status: 200 });
+  return { success: true, data: user };
 }
 
-export async function createUser(request: Request) {
+export async function createUser(body: any) {
   try {
-    const body = await request.json();
-    const { username, email, stackAuthId } = body; // stackAuthId de Stack Auth
+    const { username, email, stackAuthId } = body;
 
     if (!username || !email || !stackAuthId) {
-      return NextResponse.json(
-        { success: false, message: "All fields are required" },
-        { status: 400 }
-      );
+      return { success: false, message: "All fields are required" };
+    }
+
+    const existingUser = await prisma.user.findFirst({
+      where: {
+        OR: [{ email }, { idUser: stackAuthId }],
+      },
+    });
+
+    if (existingUser) {
+      return { success: true, message: "User already exists" };
     }
 
     const user = await prisma.user.create({
-      data: { username, email, stackAuthId },
+      data: { username, email, idUser: stackAuthId },
     });
 
-    return NextResponse.json({ success: true, user }, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, message: "Error creating user", error: error.message },
-      { status: 500 }
+    const defaultShelves = [
+      { name: "À lire", description: "Livres à lire" },
+      { name: "En cours", description: "Livres en cours de lecture" },
+      { name: "Terminés", description: "Livres terminés" },
+    ];
+
+    await Promise.all(
+      defaultShelves.map((shelf) =>
+        prisma.bookshelf.create({
+          data: {
+            idUser: user.idUser,
+            name: shelf.name,
+            description: shelf.description,
+          },
+        })
+      )
     );
+
+    return { success: true, user };
+  } catch (error: any) {
+    return { success: false, message: "Error creating user", error: error.message };
   }
 }

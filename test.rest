@@ -185,7 +185,7 @@ POST http://localhost:3000/review
 Content-Type: application/json
 
 {
-  "idUser": 2,
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e",
   "idBook": 2,
   "rating": 5,
   "full_review": "Wow!"
@@ -196,7 +196,7 @@ POST http://localhost:3000/review
 Content-Type: application/json
 
 {
-  "idUser": 2,
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e",
   "idBook": 3,
   "rating": 2,
   "full_review": "Bof..."
@@ -207,7 +207,7 @@ POST http://localhost:3000/review
 Content-Type: application/json
 
 {
-  "idUser": 2,
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e",
   "idBook": 3,
   "rating": 5,
   "full_review": "Wow!!!!!"
@@ -247,7 +247,7 @@ POST http://localhost:3000/bookshelf
 Content-Type: application/json
 
 {
-  "idUser": 1,
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e",
   "name": "SciFi New Releases"
 }
 
@@ -256,7 +256,7 @@ POST http://localhost:3000/bookshelf
 Content-Type: application/json
 
 {
-  "idUser": 1,
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e",
   "name": "My Stuff"
 }
 
@@ -265,7 +265,7 @@ POST http://localhost:3000/bookshelf
 Content-Type: application/json
 
 {
-  "idUser": 1,
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e",
   "name": "Bad books"
 }
 
@@ -299,7 +299,7 @@ Content-Type: application/json
 {
   "idBook": 3,
   "idBookshelf": 6,
-  "idUser": 2
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e"
 }
 
 ### BOOKSTATUS
@@ -309,7 +309,7 @@ Content-Type: application/json
 {
   "idBook": 3,
   "idBookshelf": 14,
-  "idUser": 1
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e"
 }
 
 ### BOOKSTATUS
@@ -319,7 +319,7 @@ Content-Type: application/json
 {
   "idBook": 2,
   "idBookshelf": 18,
-  "idUser": 1
+  "idUser": "b848ceaf-d28d-4d07-a6f1-ff9ecc8c0b2e"
 }
 
 ### Get all bookStatus

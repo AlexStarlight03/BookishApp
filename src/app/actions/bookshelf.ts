@@ -1,113 +1,141 @@
+"use server";
+
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 
-export async function createBookshelf(request: Request) {
+export async function createBookshelf(body: any) {
+  const { idUser, name, description } = body;
+  if (!idUser || !name) {
+    return { success: false, message: "Un nom de bibliotheque est requis" };
+  }
+  const user = await prisma.user.findUnique({ where: { idUser } });
+  if (!user) {
+    return { success: false, message: "Utilisateur non trouvé" };
+  }
   try {
-    const body = await request.json();
-    const { idUser, name, description } = body;
-    if (!idUser || !name) {
-      return NextResponse.json(
-        { success: false, message: "Un nom de bibliotheque est requis" },
-        { status: 400 }
-      );
-    }
-
     const bookshelf = await prisma.bookshelf.create({
-      data: {
-        idUser: Number(idUser),
-        name,
-        description: description ?? null,
-      },
+      data: { idUser, name, description: description ?? null },
     });
-
-    return NextResponse.json({ success: true, bookshelf }, { status: 201 });
+    return { success: true, bookshelf };
   } catch (error: any) {
     if (error.code === "P2002") {
-      return NextResponse.json(
-        { success: false, message: "Erreur, ce bookshelf existe deja" },
-        { status: 400 }
-      );
+      return { success: false, message: "Erreur, ce bookshelf existe deja" };
     }
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la création du bookshelf", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la création du bookshelf", error: error.message };
   }
 }
 
 export async function getBookshelves() {
   try {
     const bookshelves = await prisma.bookshelf.findMany();
-    return NextResponse.json({ success: true, data: bookshelves }, { status: 200 });
+    return { success: true, data: bookshelves };
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la récupération des bookshelves", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la récupération des bookshelves", error: error.message };
   }
 }
 
-export async function getBookshelvesByUserId({ idUser }: { idUser: number }) {
+export async function getBookshelvesByUserId({ idUser, page = 1, pageSize = 10 }: { idUser: string; page?: number; pageSize?: number }) {
   try {
     if (!idUser) {
-      return NextResponse.json({ success: false, message: "Paramètre idUser manquant ou invalide" }, { status: 400 });
+      return { success: false, message: "Paramètre idUser manquant ou invalide" };
     }
-    const bookshelves = await prisma.bookshelf.findMany({
-      where: { idUser },
-    });
-    return NextResponse.json({ success: true, data: bookshelves }, { status: 200 });
+    const skip = (page - 1) * pageSize;
+    const [bookshelves, total] = await Promise.all([
+      prisma.bookshelf.findMany({
+        where: { idUser },
+        include: {
+          booksBookshelf: {
+            include: {
+              book: {
+                include: {
+                  bookStatus: true,
+                  authors: { include: { author: true } },
+                },
+              },
+            },
+          },
+        },
+        skip,
+        take: pageSize,
+        orderBy: { idBookshelf: "asc" },
+      }),
+      prisma.bookshelf.count({ where: { idUser } }),
+    ]);
+    const bookshelvesWithCount = bookshelves.map((shelf) => ({
+      ...shelf,
+      bookCount: shelf.booksBookshelf.length,
+    }));
+    return { success: true, data: bookshelvesWithCount, total };
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la récupération des bookshelves par utilisateur", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la récupération des bookshelves par utilisateur", error: error.message };
   }
 }
 
-export async function modifyBookshelf(request: Request, { id }: { id: number }) {
+export async function modifyBookshelf({ id }: { id: number }, body: any) {
+  if (!id) {
+    return { success: false, message: "ID de bookshelf manquant ou invalide" };
+  }
   try {
-    const body = await request.json();
-    const { name, description } = body;
+    const { name, description } = body || {};
     const updateData: { name?: string; description?: string | null } = {};
     if (name !== undefined) updateData.name = name;
     if (description !== undefined) updateData.description = description;
-
     const bookshelf = await prisma.bookshelf.update({
       where: { idBookshelf: id },
       data: updateData,
     });
-
-    return NextResponse.json({ success: true, data: bookshelf }, { status: 200 });
+    return { success: true, data: bookshelf };
   } catch (error: any) {
     if (error.code === "P2025") {
-      return NextResponse.json(
-        { success: false, message: "Bookshelf non trouvé" },
-        { status: 404 }
-      );
+      return { success: false, message: "Bookshelf non trouvé" };
     }
-    return NextResponse.json(
-      { message: "Erreur lors de la modification du bookshelf", success: false, error: error.message },
-      { status: 500 }
-    );
+    return { message: "Erreur lors de la modification du bookshelf", success: false, error: error.message };
   }
 }
 
 export async function getBookshelfById({ id }: { id: number }) {
   const bookshelf = await prisma.bookshelf.findUnique({
     where: { idBookshelf: id },
+    include: {
+      booksBookshelf: {
+        include: {
+          book: {
+            include: {
+              bookStatus: true,
+              authors: { include: { author: true } },
+            },
+          },
+        },
+      },
+    },
   });
   if (!bookshelf) {
-    return NextResponse.json({ success: false, message: "Bookshelf non trouvé" }, { status: 404 });
+    return { success: false, message: "Bookshelf non trouvé" };
   }
-  return NextResponse.json({ success: true, data: bookshelf }, { status: 200 });
+  return { success: true, data: bookshelf };
 }
 
 export async function deleteBookshelf({ id }: { id: number }) {
-  await prisma.bookshelf.delete({
-    where: { idBookshelf: id },
-  });
-  return NextResponse.json({
-    success: true,
-    message: `Bookshelf avec l'id ${id} supprimé avec succès`,
-  }, { status: 200 });
+  // Delete related BookStatus records first
+  await prisma.bookStatus.deleteMany({ where: { idBookshelf: id } });
+  // Now delete the bookshelf
+  await prisma.bookshelf.delete({ where: { idBookshelf: id } });
+  return { success: true, message: `Bookshelf avec l'id ${id} supprimé avec succès` };
+}
+
+// Alias used in some components
+export async function getBookshelvesByUser(userId: string) {
+  return getBookshelvesByUserId({ idUser: userId });
+}
+
+export async function addBookToShelf({ googleBooksId, idBookshelf, idUser }: { googleBooksId: string; idBookshelf: number; idUser: string }) {
+  const { createBookStatus } = await import("./bookStatus");
+  return createBookStatus({ googleBooksId, idBookshelf, idUser });
+}
+
+export async function moveBookToShelf(
+  { idBookshelf, idBook }: { idBookshelf: number; idBook: number },
+  body: { idBookshelf: number }
+) {
+  const { modifyBookStatus } = await import("./bookStatus");
+  return modifyBookStatus({ idBookshelf, idBook }, body);
 }

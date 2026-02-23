@@ -1,60 +1,68 @@
-<<<<<<< HEAD
-Pour lancer le projet, clonez le repo sur votre machine.
+# BookishApp
 
-Ouvrez le dossier BookishApp dans VSCode (ou autre éditeur de votre choix)
+## 1. Description du projet
 
-Exécutez les commandes suivantes pour installer les dépendances du projet
+- **Lien GitHub** : [https://github.com/AlexStarlight03/BookishApp](https://github.com/AlexStarlight03/BookishApp)
+- **Objectif** : BookishApp est une application web permettant aux utilisateurs de gérer leurs lectures, les noter, et garder le tout organisé.
+- **Fonctionnalités principales** :
+  - Authentification (connexion, inscription, menu utilisateur)
+  - Gestion des livres, critiques, et étagères
+  - Ajout de livres via l’API Google Books
+  - Suivi de la progression de lecture et objectif de lecture annuel
 
-```
-cd .\Bookish-backend\
-npm install -D typescript ts-node-dev @types/node
-npm run build
-```
+## 2. Technologies utilisées
 
-Exécutez la commande suivante pour lancer le serveur (et ainsi pourvoir effectuer les tests)
+- Next.js 16.1.6 (Turbopack)
+- React 18+
+- Prisma ORM
+- Tailwind CSS
+- Stack Auth
+- Google Books API
+- TypeScript
 
-```
-npm run dev
-```
+## 3. Instructions d’installation
 
-Pour faire les tests, ouvrez dans VSCode le fichier test.rest (se trouvant dans bookish-backend)
-Cliquez sur Send Request sous chaque commande, les tests peuvent être effectués tant que le serveur est en marche.
-Les tests sont faits pour être effectués en ordre pour faciliter le tout. Un test peut être réeffectué pour tester les champs uniques.
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+1. **Cloner le projet**
+   ```bash
+   git clone https://github.com/AlexStarlight03/BookishApp.git
+   cd BookishApp
+   ```
+2. **Installer les dépendances**
+   ```bash
+   npm install
+   ```
+3. **Configurer les variables d’environnement**
+   - Copier `.env.example` en `.env` et ajouter les valeurs nécessaires pour une base donnée sur Neon, un projet Stack Auth et une clé d'API Google Books
+4. **Lancer les migrations Prisma**
+   ```bash
+   npx prisma migrate deploy
+   ```
+5. **Démarrer le serveur de développement**
+   ```bash
+   npm run dev
+   ```
 
-## Getting Started
+## 4. Variables d’environnement
 
-First, run the development server:
+- DATABASE_URL=
+- NEXT_PUBLIC_STACK_PROJECT_ID=
+- NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=
+- STACK_SECRET_SERVER_KEY=
+- NEXT_PUBLIC_GOOGLE_BOOKS_API_KEY=
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 5. Captures d’écran
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Page d’accueil et authentification**
+   ![Accueil](public/screenshots/home.png)
+2. **Dashboard avec progression annuelle**
+   ![Dashboard](public/screenshots/dashboard.png)
+3. **Gestion des étagères et livres**
+   ![Bookshelves](public/screenshots/bookshelves.png)
+4. **Explorer et rechercher des livres**
+   ![Bookshelves](public/screenshots/explore.png)
+5. **Détails de livre**
+   ![Bookshelves](public/screenshots/book.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 6. Auteur(s)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> master
+- Alexandrine Dubé

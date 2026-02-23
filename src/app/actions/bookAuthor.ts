@@ -1,44 +1,29 @@
-import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
+"use server";
 
-export async function addBookAuthor({ idAuthor, idBook }: { idAuthor: number, idBook: number }) {
+export async function createBookAuthor({ idBook, idAuthor }: { idBook: number, idAuthor: number }) {
   try {
     if (!idBook || !idAuthor) {
-      return NextResponse.json(
-        { success: false, message: "idBook et idAuthor sont requis" },
-        { status: 400 }
-      );
+      return { success: false, message: "idBook et idAuthor sont requis" };
     }
-
     const bookAuthor = await prisma.bookAuthor.create({
       data: {
         idBook,
         idAuthor,
       },
     });
-
-    return NextResponse.json({ success: true, bookAuthor }, { status: 201 });
+    return { success: true, bookAuthor };
   } catch (error: any) {
     if (error.code === "P2002") {
-      return NextResponse.json(
-        { success: false, message: "Cette relation existe déjà" },
-        { status: 400 }
-      );
+      return { success: false, message: "Cette relation existe déjà" };
     }
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de l'ajout de la relation BookAuthor", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de l'ajout de la relation BookAuthor", error: error.message };
   }
 }
 
-export async function deleteBookAuthor({ idAuthor, idBook }: { idAuthor: number, idBook: number }) {
+export async function deleteBookAuthor({ idBook, idAuthor }: { idBook: number, idAuthor: number }) {
   try {
-    if (!idAuthor || !idBook) {
-      return NextResponse.json(
-        { success: false, message: "Format d'identifiant invalide (attendu: idAuthor-idBook)" },
-        { status: 400 }
-      );
+    if (!idBook || !idAuthor) {
+      return { success: false, message: "Format d'identifiant invalide (attendu: idAuthor-idBook)" };
     }
     await prisma.bookAuthor.delete({
       where: {
@@ -48,61 +33,39 @@ export async function deleteBookAuthor({ idAuthor, idBook }: { idAuthor: number,
         },
       },
     });
-
-    return NextResponse.json({
-      success: true,
-      message: `Relation BookAuthor supprimée (Author: ${idAuthor}, Book: ${idBook})`,
-    }, { status: 200 });
+    return { success: true, message: `Relation BookAuthor supprimée (Author: ${idAuthor}, Book: ${idBook})` };
   } catch (error: any) {
     if (error.code === "P2025") {
-      return NextResponse.json(
-        { success: false, message: "Relation BookAuthor non trouvée" },
-        { status: 404 }
-      );
+      return { success: false, message: "Relation BookAuthor non trouvée" };
     }
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la suppression de la relation BookAuthor", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la suppression de la relation BookAuthor", error: error.message };
   }
 }
 
-export async function getAuthorsFromBook({ idBook }: { idBook: number }) {
+export async function getAuthorsForBook(idBook: number) {
   try {
     if (!idBook) {
-      return NextResponse.json(
-        { success: false, message: "Paramètre idBook manquant ou invalide" },
-        { status: 400 }
-      );
+      return { success: false, message: "Paramètre idBook manquant ou invalide" };
     }
     const authors = await prisma.bookAuthor.findMany({
       where: { idBook },
     });
-    return NextResponse.json({ success: true, data: authors }, { status: 200 });
+    return { success: true, data: authors };
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la récupération des auteurs du livre", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la récupération des auteurs du livre", error: error.message };
   }
 }
 
-export async function getBooksFromAuthor({ idAuthor }: { idAuthor: number }) {
+export async function getBooksForAuthor(idAuthor: number) {
   try {
     if (!idAuthor) {
-      return NextResponse.json(
-        { success: false, message: "Paramètre idAuthor manquant ou invalide" },
-        { status: 400 }
-      );
+      return { success: false, message: "Paramètre idAuthor manquant ou invalide" };
     }
     const books = await prisma.bookAuthor.findMany({
       where: { idAuthor },
     });
-    return NextResponse.json({ success: true, data: books }, { status: 200 });
+    return { success: true, data: books };
   } catch (error: any) {
-    return NextResponse.json(
-      { success: false, message: "Erreur lors de la récupération des livres de l'auteur", error: error.message },
-      { status: 500 }
-    );
+    return { success: false, message: "Erreur lors de la récupération des livres de l'auteur", error: error.message };
   }
 }

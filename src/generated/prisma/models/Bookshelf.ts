@@ -28,24 +28,22 @@ export type AggregateBookshelf = {
 
 export type BookshelfAvgAggregateOutputType = {
   idBookshelf: number | null
-  idUser: number | null
 }
 
 export type BookshelfSumAggregateOutputType = {
   idBookshelf: number | null
-  idUser: number | null
 }
 
 export type BookshelfMinAggregateOutputType = {
   idBookshelf: number | null
-  idUser: number | null
+  idUser: string | null
   name: string | null
   description: string | null
 }
 
 export type BookshelfMaxAggregateOutputType = {
   idBookshelf: number | null
-  idUser: number | null
+  idUser: string | null
   name: string | null
   description: string | null
 }
@@ -61,12 +59,10 @@ export type BookshelfCountAggregateOutputType = {
 
 export type BookshelfAvgAggregateInputType = {
   idBookshelf?: true
-  idUser?: true
 }
 
 export type BookshelfSumAggregateInputType = {
   idBookshelf?: true
-  idUser?: true
 }
 
 export type BookshelfMinAggregateInputType = {
@@ -179,7 +175,7 @@ export type BookshelfGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 
 export type BookshelfGroupByOutputType = {
   idBookshelf: number
-  idUser: number
+  idUser: string
   name: string
   description: string | null
   _count: BookshelfCountAggregateOutputType | null
@@ -209,7 +205,7 @@ export type BookshelfWhereInput = {
   OR?: Prisma.BookshelfWhereInput[]
   NOT?: Prisma.BookshelfWhereInput | Prisma.BookshelfWhereInput[]
   idBookshelf?: Prisma.IntFilter<"Bookshelf"> | number
-  idUser?: Prisma.IntFilter<"Bookshelf"> | number
+  idUser?: Prisma.StringFilter<"Bookshelf"> | string
   name?: Prisma.StringFilter<"Bookshelf"> | string
   description?: Prisma.StringNullableFilter<"Bookshelf"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -230,7 +226,7 @@ export type BookshelfWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.BookshelfWhereInput | Prisma.BookshelfWhereInput[]
   OR?: Prisma.BookshelfWhereInput[]
   NOT?: Prisma.BookshelfWhereInput | Prisma.BookshelfWhereInput[]
-  idUser?: Prisma.IntFilter<"Bookshelf"> | number
+  idUser?: Prisma.StringFilter<"Bookshelf"> | string
   name?: Prisma.StringFilter<"Bookshelf"> | string
   description?: Prisma.StringNullableFilter<"Bookshelf"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -254,7 +250,7 @@ export type BookshelfScalarWhereWithAggregatesInput = {
   OR?: Prisma.BookshelfScalarWhereWithAggregatesInput[]
   NOT?: Prisma.BookshelfScalarWhereWithAggregatesInput | Prisma.BookshelfScalarWhereWithAggregatesInput[]
   idBookshelf?: Prisma.IntWithAggregatesFilter<"Bookshelf"> | number
-  idUser?: Prisma.IntWithAggregatesFilter<"Bookshelf"> | number
+  idUser?: Prisma.StringWithAggregatesFilter<"Bookshelf"> | string
   name?: Prisma.StringWithAggregatesFilter<"Bookshelf"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Bookshelf"> | string | null
 }
@@ -268,7 +264,7 @@ export type BookshelfCreateInput = {
 
 export type BookshelfUncheckedCreateInput = {
   idBookshelf?: number
-  idUser: number
+  idUser: string
   name: string
   description?: string | null
   booksBookshelf?: Prisma.BookStatusUncheckedCreateNestedManyWithoutBookshelfInput
@@ -283,7 +279,7 @@ export type BookshelfUpdateInput = {
 
 export type BookshelfUncheckedUpdateInput = {
   idBookshelf?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   booksBookshelf?: Prisma.BookStatusUncheckedUpdateManyWithoutBookshelfNestedInput
@@ -291,7 +287,7 @@ export type BookshelfUncheckedUpdateInput = {
 
 export type BookshelfCreateManyInput = {
   idBookshelf?: number
-  idUser: number
+  idUser: string
   name: string
   description?: string | null
 }
@@ -303,7 +299,7 @@ export type BookshelfUpdateManyMutationInput = {
 
 export type BookshelfUncheckedUpdateManyInput = {
   idBookshelf?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -327,7 +323,6 @@ export type BookshelfCountOrderByAggregateInput = {
 
 export type BookshelfAvgOrderByAggregateInput = {
   idBookshelf?: Prisma.SortOrder
-  idUser?: Prisma.SortOrder
 }
 
 export type BookshelfMaxOrderByAggregateInput = {
@@ -346,7 +341,6 @@ export type BookshelfMinOrderByAggregateInput = {
 
 export type BookshelfSumOrderByAggregateInput = {
   idBookshelf?: Prisma.SortOrder
-  idUser?: Prisma.SortOrder
 }
 
 export type BookshelfScalarRelationFilter = {
@@ -454,7 +448,7 @@ export type BookshelfScalarWhereInput = {
   OR?: Prisma.BookshelfScalarWhereInput[]
   NOT?: Prisma.BookshelfScalarWhereInput | Prisma.BookshelfScalarWhereInput[]
   idBookshelf?: Prisma.IntFilter<"Bookshelf"> | number
-  idUser?: Prisma.IntFilter<"Bookshelf"> | number
+  idUser?: Prisma.StringFilter<"Bookshelf"> | string
   name?: Prisma.StringFilter<"Bookshelf"> | string
   description?: Prisma.StringNullableFilter<"Bookshelf"> | string | null
 }
@@ -467,7 +461,7 @@ export type BookshelfCreateWithoutBooksBookshelfInput = {
 
 export type BookshelfUncheckedCreateWithoutBooksBookshelfInput = {
   idBookshelf?: number
-  idUser: number
+  idUser: string
   name: string
   description?: string | null
 }
@@ -496,7 +490,7 @@ export type BookshelfUpdateWithoutBooksBookshelfInput = {
 
 export type BookshelfUncheckedUpdateWithoutBooksBookshelfInput = {
   idBookshelf?: Prisma.IntFieldUpdateOperationsInput | number
-  idUser?: Prisma.IntFieldUpdateOperationsInput | number
+  idUser?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -611,7 +605,7 @@ export type $BookshelfPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     idBookshelf: number
-    idUser: number
+    idUser: string
     name: string
     description: string | null
   }, ExtArgs["result"]["bookshelf"]>
@@ -1040,7 +1034,7 @@ export interface Prisma__BookshelfClient<T, Null = never, ExtArgs extends runtim
  */
 export interface BookshelfFieldRefs {
   readonly idBookshelf: Prisma.FieldRef<"Bookshelf", 'Int'>
-  readonly idUser: Prisma.FieldRef<"Bookshelf", 'Int'>
+  readonly idUser: Prisma.FieldRef<"Bookshelf", 'String'>
   readonly name: Prisma.FieldRef<"Bookshelf", 'String'>
   readonly description: Prisma.FieldRef<"Bookshelf", 'String'>
 }
