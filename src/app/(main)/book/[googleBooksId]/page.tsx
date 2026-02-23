@@ -13,8 +13,13 @@ const ReviewBookForm = dynamic(() => import("@/components/forms/ReviewBookForm")
 import { use } from "react";
 
 export default function BookDetailsPage({ params }: { params: { googleBooksId: string } | Promise<{ googleBooksId: string }> }) {
-  const resolvedParams = typeof (params as any).then === "function" ? use(params as Promise<{ googleBooksId: string }>) : params;
-  const googleBooksId = resolvedParams.googleBooksId;
+  let googleBooksId = "";
+  if (typeof (params as any).then === "function") {
+    const resolvedParams = use(params as Promise<{ googleBooksId: string }>);
+    googleBooksId = resolvedParams.googleBooksId;
+  } else {
+    googleBooksId = (params as { googleBooksId: string }).googleBooksId;
+  }
   const [editReview, setEditReview] = useState<any | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [reviews, setReviews] = useState<any[]>([]);
