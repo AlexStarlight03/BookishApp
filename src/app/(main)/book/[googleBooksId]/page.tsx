@@ -28,7 +28,7 @@ export default async function BookDetailsPage({ params }: { params: { googleBook
   return (
     <div className="main-block bg-card">
       <div className="flex flex-col md:flex-row gap-6">
-        <img src={book.cover_img_url} alt={book.title} className="h-100 rounded shadow" />
+        <img src={book.cover_img_url || "/default-cover.png"} alt={book.title} className="h-100 rounded shadow" />
         <div>
           <h1 className="book-title">{book.title}</h1>
           <p className="book-author">
