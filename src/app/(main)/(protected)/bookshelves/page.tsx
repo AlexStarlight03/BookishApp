@@ -19,14 +19,14 @@ export default async function BookshelvesPage() {
 	const userId = user.id;
 	const result = await getBookshelvesByUserId({ idUser: userId });
 	let bookshelves = result?.data || [];
-	bookshelves = bookshelves.sort((a, b) => {
-		const aDefault = DEFAULT_SHELVES.indexOf(a.name);
-		const bDefault = DEFAULT_SHELVES.indexOf(b.name);
-		if (aDefault !== -1 && bDefault !== -1) return aDefault - bDefault;
-		if (aDefault !== -1) return -1;
-		if (bDefault !== -1) return 1;
-		return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-	});
+	 bookshelves = bookshelves.sort((a, b) => {
+		 const aDefault = DEFAULT_SHELVES.indexOf(a.name);
+		 const bDefault = DEFAULT_SHELVES.indexOf(b.name);
+		 if (aDefault !== -1 && bDefault !== -1) return aDefault - bDefault;
+		 if (aDefault !== -1) return -1;
+		 if (bDefault !== -1) return 1;
+		 return a.idBookshelf - b.idBookshelf;
+	 });
 
 		return (
 			<main className="max-w-4xl mx-auto px-4 py-8">

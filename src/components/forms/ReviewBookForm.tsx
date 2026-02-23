@@ -63,7 +63,7 @@ export default function ReviewBookForm({
     }
     const { createReview, modifyReview } = await import("@/app/actions/review");
     if (reviewId) {
-      await modifyReview({ id: reviewId, googleBooksId, idUser, rating, full_review: review });
+      await modifyReview({ id: reviewId, rating, full_review: review });
     } else {
       await createReview({ googleBooksId, idUser, rating, full_review: review });
     }

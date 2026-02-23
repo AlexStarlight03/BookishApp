@@ -3,6 +3,6 @@ import ExploreClient from "./ExploreClient";
 
 export default async function ExplorePage() {
   const result = await getCategories();
-  const categories = result.success ? result.data : [];
+  const categories = result.success && Array.isArray(result.data) ? result.data : [];
   return <ExploreClient categories={categories} />;
 }

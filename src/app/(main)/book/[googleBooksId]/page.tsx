@@ -15,12 +15,12 @@ export default async function BookDetailsPage({ params }: { params: { googleBook
   }
   const bookResult = await getBookById({ googleBooksId });
   const book = bookResult?.book || null;
-  let reviews = [];
+  let reviews: any[] = [];
   let averageRating = 0;
   if (book) {
     const reviewsData = await getReviewsFromBook({ googleBooksId });
     reviews = reviewsData?.reviews || [];
-    averageRating = reviewsData?.averageRating || 0;
+    averageRating = (reviewsData && "averageRating" in reviewsData && typeof (reviewsData as any).averageRating === "number") ? (reviewsData as any).averageRating : 0;
   }
 
   if (!book) return <div>Chargement...</div>;
@@ -28,7 +28,7 @@ export default async function BookDetailsPage({ params }: { params: { googleBook
   return (
     <div className="main-block bg-card">
       <div className="flex flex-col md:flex-row gap-6">
-        <img src={book.cover_img_url} alt={book.title} className="h-100 rounded shadow" />
+        <img src={book.cover_img_url || "/default-cover.png"} alt={book.title} className="h-100 rounded shadow" />
         <div>
           <h1 className="book-title">{book.title}</h1>
           <p className="book-author">
