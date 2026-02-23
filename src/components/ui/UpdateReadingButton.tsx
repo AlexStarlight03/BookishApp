@@ -22,6 +22,11 @@ export default function UpdateReadingButton({
         const { getBookById } = await import("@/app/actions/book");
         const data = await getBookById({ googleBooksId });
         const bookData = data.book;
+        if (!bookData) {
+          alert("Impossible de trouver les informations du livre.");
+          setShowForm(false);
+          return;
+        }
         const bookshelfEntry = userBookshelves
           .flatMap(shelf =>
             (shelf.booksBookshelf || []).map((bookShelfEntry: any) => ({
