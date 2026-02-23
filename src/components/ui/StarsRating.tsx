@@ -14,9 +14,7 @@ export default function StarsRating({ googleBooksId }: { googleBooksId: string }
       setLoading(true);
       const { getReviewsFromBook } = await import("@/app/actions/review");
       const result = await getReviewsFromBook({ googleBooksId });
-      const ratings = Array.isArray(result.data)
-        ? result.data
-        : Array.isArray(result.reviews)
+      const ratings = Array.isArray(result.reviews)
         ? result.reviews
         : [];
       if (ratings.length > 0) {
