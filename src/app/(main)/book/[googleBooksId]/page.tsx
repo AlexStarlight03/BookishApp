@@ -15,7 +15,7 @@ export default async function BookDetailsPage({ params }: { params: { googleBook
   }
   const bookResult = await getBookById({ googleBooksId });
   const book = bookResult?.book || null;
-  let reviews = [];
+  let reviews: any[] = [];
   let averageRating = 0;
   if (book) {
     const reviewsData = await getReviewsFromBook({ googleBooksId });
